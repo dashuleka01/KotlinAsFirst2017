@@ -143,12 +143,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return when{/*
-        a in c..d && b > d -> d - a // пересение АВ и СD (слева CD, справа AB)
-        c in a..b && b < d -> b - c // пересечение АВ и СD (слева AB, справа CD)
-        c in a..d && d in c..b -> d - c // СD в AB
-        a in c..b && b < d -> d - c // СD в AB*/
-
+    return when{
+        a <= c && b in c..d -> b - c //пересечение, слева AB, справа CD,  A-C-B-D
+        c >= a && d in c..b -> d - c //CD в AB, A-C-D-B
+        a >= c && b in a..d -> b - a //AB в CD, С-A-B-D
+        a >= c && d in a..b -> d - a //пересечение, слева CD, справа AB, C-A-D-B
         else -> -1
     }
 }
