@@ -88,10 +88,12 @@ fun timeForHalfWay(t1: Double, v1: Double,
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int {
+    val rook1Attack = kingX == rookX1 || kingY == rookY1
+    val rook2Attack = kingX == rookX2 || kingY == rookY2
     return when{
-        (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
-        kingX == rookX1 || kingY == rookY1 -> 1
-        kingX == rookX2 || kingY == rookY2 -> 2
+        rook1Attack && rook2Attack -> 3
+        rook1Attack -> 1
+        rook2Attack -> 2
         else -> 0
     }
 }
@@ -109,10 +111,12 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int {
+    val rookAttack = kingX == rookX || kingY == rookY
+    val bishopAttack = abs(kingX - bishopX) == abs(kingY - bishopY)
     return when{
-        (kingX == rookX || kingY == rookY) && abs(kingX - bishopX) == abs(kingY - bishopY) -> 3
-        kingX == rookX || kingY == rookY -> 1
-        abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
+        rookAttack && bishopAttack -> 3
+        rookAttack -> 1
+        bishopAttack -> 2
         else -> 0
     }
 }
@@ -126,11 +130,19 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    return  when{
-        a >= b + c || b >= a + c || c >= b + a -> -1
-        a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a -> 1
-        (a * a + b * b - c * c) / (2 * a * b) < 0 || (b * b + c * c - a * a) / (2 * b * c) < 0 || (c * c + a * a - b * b) / (2 * c * a) < 0 -> 2
-        else -> 0
+    var MaxNum = max(a, b)
+    MaxNum = max(MaxNum, c)
+    var MinNum = min(a, b)
+    MinNum = min(MinNum, c)
+    val MiddleNum = a + b + c - MinNum - MaxNum
+    val result = MinNum * MinNum + MiddleNum * MiddleNum - MaxNum * MaxNum
+
+    return when{
+        a + b <= c || b + c <= a || c + a <= b -> -1
+        result < 0 -> 2
+        result > 0 -> 0
+        result == 0.0 -> 1
+        else -> -2
     }
 }
 
