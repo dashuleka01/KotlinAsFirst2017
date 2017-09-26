@@ -36,7 +36,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     var word = ""
-    if (age in 1..4 || ((age % 100) >= 21 && (age % 10) in 1..4)) {
+    if (age in 1..4 || ((age % 100) >= 21 && (age % 10) in 1..4) || (age in 101..104)) {
         if (age == 1 || (age % 10) == 1) {
             word = "$age год"
         }
