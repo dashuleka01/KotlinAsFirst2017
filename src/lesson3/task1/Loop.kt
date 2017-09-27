@@ -97,7 +97,7 @@ fun fib(n: Int): Int = TODO() /*{
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var i = 2
+    var i = 1
     while(i % m != 0 || i % n != 0) {
         i++
     }
@@ -154,7 +154,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
     var result = false
-    for(k in 1..sqrt(n.toDouble()).toInt()){
+    for(k in 0..sqrt(n.toDouble()).toInt()){
         if (k * k >= m && k * k <= n)
             result = true
     }
