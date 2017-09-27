@@ -1,6 +1,8 @@
 @file:Suppress("UNUSED_PARAMETER")
 package lesson3.task1
 
+import java.lang.Math.*
+
 /**
  * Пример
  *
@@ -62,16 +64,11 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var result = 0
-    var num = n
+    var num = abs(n)
     do{
         result++
         num /= 10
     } while (num > 0)
-   /* while(n > 0){
-        result++
-        num /= 10
-    }
-    if(n == 0) result = 1*/
     return result
 }
 
@@ -81,7 +78,8 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int = TODO() //if (fib(n) == fib(n - 2) + fib(n - 1)) /*&& fib(1) == 1 && fib(2) == 1)*/ n else fib(n - 1)
+
 
 /**
  * Простая
@@ -89,21 +87,37 @@ fun fib(n: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var i = 2
+    while(i % m != 0 || i % n != 0) {
+        i++
+    }
+    return i
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var i = 2
+    while(n % i != 0)
+        i++
+    return i
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var i = n - 1
+    while(n % i != 0)
+        i--
+    return i
+}
 
 /**
  * Простая
@@ -112,7 +126,15 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    val maxNum = max(m, n)
+    var result = true
+    for(i in 2..maxNum){
+        if(m % i == 0 && n % i == 0)
+            result = false
+    }
+    return result
+}
 
 /**
  * Простая
@@ -121,7 +143,13 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+fun squareBetweenExists(m: Int, n: Int): Boolean = TODO() /*{
+    var result = false
+    for(k in 1..n)
+        if(k * k >= m && k * k <= n)
+            result = true
+    return result
+}*/
 
 /**
  * Средняя
@@ -130,7 +158,24 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  * sin(x) = x - x^3 / 3! + x^5 / 5! - x^7 / 7! + ...
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+
+fun sin(x: Double, eps: Double): Double = TODO()/*{
+    var sin = x
+    var flag = 0
+    var i = 3
+  while(abs(pow(x, i.toDouble()) / factorial(i)) >= eps){
+          if (flag == 0) {
+              sin -= pow(x, i.toDouble()) / factorial(i)
+              flag = 1
+          }
+          else {
+              sin += pow(x, i.toDouble()) / factorial(i)
+              flag = 0
+          }
+      i += 2
+  }
+    return sin
+}*/
 
 /**
  * Средняя
