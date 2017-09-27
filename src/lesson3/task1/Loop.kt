@@ -78,7 +78,16 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO() //if (fib(n) == fib(n - 2) + fib(n - 1)) /*&& fib(1) == 1 && fib(2) == 1)*/ n else fib(n - 1)
+fun fib(n: Int): Int = TODO() /*{
+    var result = 0
+    if (fib(n) == fib(n - 2) + fib(n - 1))
+      result  = n
+    else fib(n - 1)
+
+    if(n == 1 || n == 2)
+        result  = n
+    return result
+}*/
 
 
 /**
@@ -143,13 +152,14 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = TODO() /*{
+fun squareBetweenExists(m: Int, n: Int): Boolean {
     var result = false
-    for(k in 1..n)
-        if(k * k >= m && k * k <= n)
+    for(k in 1..sqrt(n.toDouble()).toInt()){
+        if (k * k >= m && k * k <= n)
             result = true
+    }
     return result
-}*/
+}
 
 /**
  * Средняя
@@ -159,11 +169,11 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO() /*{
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 
-fun sin(x: Double, eps: Double): Double = TODO()/*{
-    var sin = x
-    var flag = 0
-    var i = 3
-  while(abs(pow(x, i.toDouble()) / factorial(i)) >= eps){
+fun sin(x: Double, eps: Double): Double = TODO() /*{
+    var sin = 0.0
+    var flag = 1
+    var i = 1
+  while(abs(pow(x, i.toDouble()) / factorial(i)) >= abs(eps)){
           if (flag == 0) {
               sin -= pow(x, i.toDouble()) / factorial(i)
               flag = 1
