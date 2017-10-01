@@ -170,23 +170,34 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 
-fun sin(x: Double, eps: Double): Double = TODO() /*{
-    var sin = 0.0
+fun sin(x: Double, eps: Double): Double /*{
+    var sin = 0
     var flag = 1
-    var i = 1
-  while(abs(pow(x, i.toDouble()) / factorial(i)) >= abs(eps)){
+    var i = 1.0
+  while(pow(x, i) / factorial(i.toInt()) >= eps){
           if (flag == 0) {
-              sin -= pow(x, i.toDouble()) / factorial(i)
+              sin -= pow(x, i) / factorial(i.toInt())
               flag = 1
+              i += 2
           }
           else {
-              sin += pow(x, i.toDouble()) / factorial(i)
+              sin += pow(x, i) / factorial(i.toInt())
               flag = 0
+              i += 2
           }
-      i += 2
+
   }
     return sin
 }*/
+{
+    var i = 0
+    var sin = 0.0
+    while(pow(x, i * 2 + 1.0) / factorial(i) >= eps){
+        sin += pow(x, 2 * i + 1.0) / factorial(i * 2 +1) * pow(-1.0, i.toDouble())
+        i++
+    }
+    return sin
+}
 
 /**
  * Средняя
@@ -234,10 +245,6 @@ fun revert(n: Int): Int {
         num /= 10
     }
     return result
-
-
-
-
 }
 
 /**
@@ -280,10 +287,12 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
 fun squareSequenceDigit(n: Int): Int = TODO() /*{
-    var digit = digitNumber(n)
-    var result = 0
-    var num = n
-    for(num / pow(10.0, digit - 1.0))
+    var z = 0
+    for(i in 1..n){
+        z = i * i
+    }
+    return z
+
 }*/
 
 /**
