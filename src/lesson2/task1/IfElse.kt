@@ -35,19 +35,6 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-   /* var word = ""
-    if (age in 1..4 || ((age % 100) >= 21 && (age % 10) in 1..4) || (age in 101..104)) {
-        if (age == 1 || (age % 10) == 1) {
-            word = "$age год"
-        }
-        else
-            word = "$age года"
-    }
-    else{
-        word = "$age лет"
-    }
-    return*/
-
      return if (age in 1..4 || ((age % 100) >= 21 && (age % 10) in 1..4) || (age in 101..104)) {
         if (age == 1 || (age % 10) == 1)
             "$age год"
@@ -76,7 +63,6 @@ fun timeForHalfWay(t1: Double, v1: Double,
     var s = v1 * t1 + v2 * t2 + v3 * t3
     var s1 = v1 * t1
     var s2 = v2 * t2
-    var s3 = v3 * t3
 
     return when{
         s / 2.0 <= s1 -> (s / 2.0) / v1

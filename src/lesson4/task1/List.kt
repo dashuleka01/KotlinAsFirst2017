@@ -124,11 +124,10 @@ fun abs(v: List<Double>): Double {
 fun mean(list: List<Double>): Double{
     var result = 0.0
     if(list.size == 0) return 0.0
-    else{
-        for(i in 0..list.size - 1)
-            result += list[i]
-        return result / list.size
-    }
+    for(i in 0..list.size - 1)
+        result += list[i]
+    return result / list.size
+
 }
 
 /**
@@ -140,9 +139,9 @@ fun mean(list: List<Double>): Double{
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    val middle = mean(list)
+    val meanValue = mean(list)
     for(i in 0..list.size - 1)
-        list[i] -= middle
+        list[i] -= meanValue
     return list
 }
 
@@ -199,6 +198,7 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()/* {
     return list
 }*/
 
+
 /**
  * Средняя
  *
@@ -235,7 +235,19 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> = TODO()/*{
+    var list = mutableListOf<Int>()
+    var  num = n
+    var i = 0
+    while(num >= base){
+        list[i] = num % base
+        num /= base
+        i++
+    }
+    if(num < base)
+        list[0] = num
+    return list
+}*/
 
 /**
  * Сложная

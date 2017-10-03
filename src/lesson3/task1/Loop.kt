@@ -154,12 +154,11 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    var result = false
-    for(k in 0..sqrt(n.toDouble()).toInt()){
-        if (k * k >= m && k * k <= n)
-            result = true
+    for(k in sqrt(m.toDouble()).toInt()..sqrt(n.toDouble()).toInt()){
+        if (k * k in m..n)
+            return true
     }
-    return result
+    return false
 }
 
 /**
@@ -170,30 +169,14 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 
-fun sin(x: Double, eps: Double): Double /*{
-    var sin = 0
-    var flag = 1
-    var i = 1.0
-  while(pow(x, i) / factorial(i.toInt()) >= eps){
-          if (flag == 0) {
-              sin -= pow(x, i) / factorial(i.toInt())
-              flag = 1
-              i += 2
-          }
-          else {
-              sin += pow(x, i) / factorial(i.toInt())
-              flag = 0
-              i += 2
-          }
-
-  }
-    return sin
-}*/
-{
+fun sin(x: Double, eps: Double): Double {
+    var x1 = x
     var i = 0
     var sin = 0.0
-    while(pow(x, i * 2 + 1.0) / factorial(i) >= eps){
-        sin += pow(x, 2 * i + 1.0) / factorial(i * 2 +1) * pow(-1.0, i.toDouble())
+    while(abs(x1) >= 2 * PI)
+        x1 -= 2 * PI
+    while(pow(x1, i * 2 + 1.0) / factorial(i) >= eps){
+        sin += pow(x1, 2 * i + 1.0) / factorial(i * 2 +1) * pow(-1.0, i.toDouble())
         i++
     }
     return sin
@@ -206,23 +189,26 @@ fun sin(x: Double, eps: Double): Double /*{
  * cos(x) = 1 - x^2 / 2! + x^4 / 4! - x^6 / 6! + ...
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
-fun cos(x: Double, eps: Double): Double = TODO() /*{
+fun cos(x: Double, eps: Double): Double {
     var cos = 1.0
     var flag = 0
     var i = 2
-    while(abs(pow(x, i.toDouble()) / factorial(i)) >= abs(eps)){
+    var x1 = x
+    while(abs(x1) >= 2 * PI)
+        x1 -= 2 * PI
+    while(abs(pow(x1, i.toDouble()) / factorial(i)) >= abs(eps)){
         if (flag == 0) {
-            cos -= pow(x, i.toDouble()) / factorial(i)
+            cos -= pow(x1, i.toDouble()) / factorial(i)
             flag = 1
         }
         else {
-            cos += pow(x, i.toDouble()) / factorial(i)
+            cos += pow(x1, i.toDouble()) / factorial(i)
             flag = 0
         }
         i += 2
     }
     return cos
-}*/
+}
 
 /**
  * Средняя
@@ -256,10 +242,7 @@ fun revert(n: Int): Int {
  */
 fun isPalindrome(n: Int): Boolean {
     val revertNum = revert(n)
-    if(n == revertNum)
-        return true
-    else
-        return false
+    return n == revertNum
 }
 
 /**
@@ -271,12 +254,11 @@ fun isPalindrome(n: Int): Boolean {
 fun hasDifferentDigits(n: Int): Boolean {
     var firstNum = n % 10
     var num = n / 10
-    var result = false
     while(num > 0){
-        if(num % 10 != firstNum) result = true
+        if(num % 10 != firstNum) return true
         num /= 10
     }
-    return result
+    return false
 }
 
 /**
