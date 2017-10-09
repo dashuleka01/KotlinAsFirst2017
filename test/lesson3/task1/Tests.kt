@@ -125,6 +125,13 @@ class Tests {
     }
 
     @Test
+    fun ncd() {
+        assertEquals(2, ncd(10, 12))
+        assertEquals(1, ncd(47, 45))
+        assertEquals(15, ncd(45, 15))
+    }
+
+    @Test
     @Tag("Easy")
     fun isCoPrime() {
         assertTrue(isCoPrime(25, 49))
