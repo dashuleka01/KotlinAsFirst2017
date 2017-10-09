@@ -112,12 +112,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var i = 2
-    while(n % i != 0)
-        i++
-   return i
-   /* for(i in 2..n / 2)
-        if(n % i == 0) return i*/
+   for(i in 2..n / 2) {
+       if (n % i == 0) return i
+   }
+    return n
 }
 
 /**
@@ -126,10 +124,10 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var i = n - 1
-    while(n % i != 0)
-        i--
-    return i
+    for(i in (n - 1) downTo 2) {
+        if (n % i == 0) return i
+    }
+    return 1
 }
 
 /**
@@ -150,7 +148,7 @@ fun ncd (m: Int, n: Int): Int{
             nNum /= i
             mNum /= i
         }
-        else i++
+        else {i++}
     }
     return result
 }
@@ -193,6 +191,7 @@ fun sin(x: Double, eps: Double): Double {
     var x1 = x
     var i = 0
     var sin = 0.0
+    var a = 0
     while(abs(x1) >= 2 * PI)
         x1 -= 2 * PI
     while(pow(x1, i * 2 + 1.0) / factorial(i) >= eps){
@@ -237,7 +236,7 @@ fun cos(x: Double, eps: Double): Double {
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    var count = 0
+    var count = 0.0
     var num = n
     var result = 0
     while (num > 0){
@@ -246,8 +245,8 @@ fun revert(n: Int): Int {
     }
     num = n
     while (count > 0){
-        result += pow(10.0, count.toDouble() - 1).toInt() * (num % 10)
         count--
+        result += pow(10.0, count).toInt() * (num % 10)
         num /= 10
     }
     return result
