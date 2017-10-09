@@ -168,7 +168,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Значение пустого многочлена равно 0.0 при любом x.
  */
 fun polynom(p: List<Double>, x: Double): Double {
-    var result = 0.0
+    var result =  0.0
     for(i in 0..p.size - 1)
         result += p[i] * pow(x, i.toDouble())
     return result
