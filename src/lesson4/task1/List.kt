@@ -111,8 +111,8 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var result = 0.0
-    for(i in 0..v.size - 1)
-        result += v[i] * v[i]
+    for(i in v)
+        result += i * i
     return sqrt(result)
 }
 
@@ -124,8 +124,8 @@ fun abs(v: List<Double>): Double {
 fun mean(list: List<Double>): Double{
     var result = 0.0
     if(list.size == 0) return 0.0
-    for(i in 0..list.size - 1)
-        result += list[i]
+    for(i in list)
+        result += i
     return result / list.size
 
 }
