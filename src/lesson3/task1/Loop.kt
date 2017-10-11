@@ -189,14 +189,19 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
 
 fun sin(x: Double, eps: Double): Double {
     var x1 = x
-    var i = 0
+    var i = 1.0
     var sin = 0.0
-    var a = 0
-    while(abs(x1) >= 2 * PI)
+    var sign = 0.0
+    while(x1 >= 2 * PI)
         x1 -= 2 * PI
-    while(pow(x1, i * 2 + 1.0) / factorial(i) >= eps){
-        sin += pow(x1, 2 * i + 1.0) / factorial(i * 2 +1) * pow(-1.0, i.toDouble())
-        i++
+    while(x1 < 0)
+        x1 += 2 * PI
+    var a = pow(x1, i) / factorial(i.toInt())
+    while(abs(a) >= eps){
+        sin += a
+        i += 2
+        sign++
+        a = (pow(x1, i) / factorial(i.toInt())) * pow(-1.0, sign)
     }
     return sin
 }
