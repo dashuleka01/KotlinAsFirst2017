@@ -245,17 +245,17 @@ fun cos(x: Double, eps: Double): Double {
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    var count = 0.0
+    var digitCount = 0.0
     var num = n
     var result = 0
     while (num > 0){
-        count++
+        digitCount++
         num /= 10
     }
     num = n
-    while (count > 0){
-        count--
-        result += pow(10.0, count).toInt() * (num % 10)
+    while (digitCount > 0){
+        digitCount--
+        result += pow(10.0, digitCount).toInt() * (num % 10)
         num /= 10
     }
     return result
