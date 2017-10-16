@@ -192,10 +192,10 @@ fun sin(x: Double, eps: Double): Double {
     var i = 1.0
     var sin = 0.0
     var sign = 0.0
-    while(x1 >= 2 * PI)
-        x1 -= 2 * PI
-    while(x1 < 0)
-        x1 += 2 * PI
+    var x2 = abs(x1)
+    while (x2 >= 2 * PI)
+        x2 -= 2 * PI
+    x1 = x2 * x1 / abs(x1)
     var a = pow(x1, i) / factorial(i.toInt())
     while(abs(a) >= eps){
         sin += a
