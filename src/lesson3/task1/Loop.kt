@@ -218,10 +218,10 @@ fun cos(x: Double, eps: Double): Double {
     var flag = 0
     var i = 2
     var x1 = x
-    while(x1 >= 2 * PI)
-        x1 -= 2 * PI
-    while(x1 < 0)
-        x1 += 2 * PI
+    var x2 = abs(x1)
+    while (x2 >= 2 * PI)
+        x2 -= 2 * PI
+    x1 = x2 * x1 / abs(x1)
     var a = pow(x1, i.toDouble()) / factorial(i)
     while(abs(a) >= abs(eps)){
         if (flag == 0) {
