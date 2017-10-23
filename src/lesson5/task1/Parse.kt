@@ -66,7 +66,36 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String = TODO()/*{
+    val parts = str.split(" ")
+    var result = ""
+    val day = twoDigitStr(parts[0].toInt())
+    var month: String? = ""
+    val year = parts[2]
+
+    try {
+        when {
+            parts[1] == "января" -> month = "01."
+            parts[1] == "февраля" -> month = "02."
+            parts[1] == "марта" -> month = "03."
+            parts[1] == "апреля" -> month = "04."
+            parts[1] == "мая" -> month = "05."
+            parts[1] == "июня" -> month = "06."
+            parts[1] == "июля" -> month = "07."
+            parts[1] == "августа" -> month = "08."
+            parts[1] == "сентября" -> month = "09."
+            parts[1] == "октября" -> month = "10."
+            parts[1] == "ноября" -> month = "11."
+            parts[1] == "декабря" -> month = "12."
+        }
+        return if(month == "") ""
+        else "$day.$month$year"
+    }
+    catch(e: IndexOutOfBoundsException){
+        throw e
+    }
+
+}*/
 
 /**
  * Средняя

@@ -184,15 +184,14 @@ fun polynom(p: List<Double>, x: Double): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()/* {
-
+fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()/*{
     if(list.size != 0){
-        val list1 = list
-        var sum = 0.0
-        for(i in 1..list.size - 1) {
-            sum += list1[i - 1]
+        var sum = list[0]
+        var current = 0.0
+        for(i in 1..list.size - 1){
+            current = list[i]
             list[i] += sum
-
+            sum += current
         }
     }
     return list
@@ -206,18 +205,21 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()/* {
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO() /*{
+fun factorize(n: Int): List<Int> = TODO()/*{
     var num = n
     var list = mutableListOf<Int>()
-    var j = 0
-    for(i in 2..n) {
-        if (isPrime(i)) {
-            list[j] = i
-            num /= i
+    if(isPrime(n)){
+        list.add(n)
+    }
+    else{
+        for(i in 2..sqrt(n.toDouble()).toInt() + 1) {
+            while (num % i == 0) {
+                num /= i
+                list.add(i)
+            }
         }
     }
     return list
-
 }*/
 
 /**
@@ -226,7 +228,13 @@ fun factorize(n: Int): List<Int> = TODO() /*{
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = TODO()/*{
+    val list = factorize(n)
+    var result = ""
+    for(i in list)
+        result += "$i*"
+    return result.dropLast(1)
+}*/
 
 /**
  * Средняя
@@ -237,16 +245,17 @@ fun factorizeToString(n: Int): String = TODO()
  */
 fun convert(n: Int, base: Int): List<Int> = TODO()/*{
     var list = mutableListOf<Int>()
+    var resultList = mutableListOf<Int>()
     var  num = n
-    var i = 0
-    while(num >= base){
-        list[i] = num % base
+    while(num > 0) {
+        list.add(num % base)
         num /= base
-        i++
     }
-    if(num < base)
-        list[0] = num
-    return list
+    var sizeList = list.size - 1
+    for(i in 0..sizeList){
+        resultList.add(list[sizeList - i])
+    }
+    return resultList
 }*/
 
 /**
@@ -257,7 +266,42 @@ fun convert(n: Int, base: Int): List<Int> = TODO()/*{
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String = TODO()/*{
+    var list = convert(n, base)
+    var result = ""
+    for(i in list){
+        when{
+            i == 10 -> result += "a"
+            i == 11 -> result += "b"
+            i == 12 -> result += "c"
+            i == 13 -> result += "d"
+            i == 14 -> result += "e"
+            i == 15 -> result += "f"
+            i == 16 -> result += "g"
+            i == 17 -> result += "h"
+            i == 18 -> result += "i"
+            i == 19 -> result += "j"
+            i == 20 -> result += "k"
+            i == 21 -> result += "l"
+            i == 22 -> result += "m"
+            i == 23 -> result += "n"
+            i == 24 -> result += "o"
+            i == 25 -> result += "p"
+            i == 26 -> result += "q"
+            i == 27 -> result += "r"
+            i == 28 -> result += "s"
+            i == 29 -> result += "t"
+            i == 30 -> result += "u"
+            i == 31 -> result += "v"
+            i == 32 -> result += "w"
+            i == 33 -> result += "x"
+            i == 34 -> result += "y"
+            i == 35 -> result += "z"
+            else -> result += i.toString()
+        }
+    }
+    return result
+}*/
 
 /**
  * Средняя

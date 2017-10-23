@@ -192,17 +192,14 @@ fun sin(x: Double, eps: Double): Double {
     var i = 1.0
     var sin = 0.0
     var sign = 0.0
-    var x2 = abs(x1)
-    while (x2 >= 2 * PI)
-        x2 -= 2 * PI
-    x1 = x2 * x1 / abs(x1)
-    var a = pow(x1, i) / factorial(i.toInt())
-    while(abs(a) >= eps){
+    var a = 0.0
+    x1 = x % (2 * PI)
+    do {
+        a = (pow(x1, i) / factorial(i.toInt())) * pow(-1.0, sign)
         sin += a
         i += 2
         sign++
-        a = (pow(x1, i) / factorial(i.toInt())) * pow(-1.0, sign)
-    }
+    } while(abs(a) >= eps)
     return sin
 }
 
@@ -218,12 +215,10 @@ fun cos(x: Double, eps: Double): Double {
     var flag = 0
     var i = 2
     var x1 = x
-    var x2 = abs(x1)
-    while (x2 >= 2 * PI)
-        x2 -= 2 * PI
-    x1 = x2 * x1 / abs(x1)
-    var a = pow(x1, i.toDouble()) / factorial(i)
-    while(abs(a) >= abs(eps)){
+    var a = 0.0
+    x1 = x % (2 * PI)
+    do {
+        a = pow(x1, i.toDouble()) / factorial(i)
         if (flag == 0) {
             cos -= a
             flag = 1
@@ -233,8 +228,7 @@ fun cos(x: Double, eps: Double): Double {
             flag = 0
         }
         i += 2
-        a = pow(x1, i.toDouble()) / factorial(i)
-    }
+    } while(abs(a) >= abs(eps))
     return cos
 }
 
@@ -296,12 +290,17 @@ fun hasDifferentDigits(n: Int): Boolean {
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int = TODO() /*{
-    var z = 0
+fun squareSequenceDigit(n: Int): Int = TODO()/*{
+    var count = 0
+    var result = 0
     for(i in 1..n){
-        z = i * i
+        for(j in 1..digitNumber(i * i)){
+            count++
+            if(count == n)
+                result = (i * i / pow(10.0, digitNumber(i * i) - j * 1.0).toInt()) % 10
+        }
     }
-    return z
+    return result
 
 }*/
 
@@ -312,4 +311,21 @@ fun squareSequenceDigit(n: Int): Int = TODO() /*{
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int = TODO()/*{
+    var x = 1
+    var y = 0
+    var z = x + y
+    var count = 0
+    var result = 0
+    while(result == 0){
+        for(j in 1..digitNumber(z)){
+            count++
+            if(count == n)
+                result = (z / pow(10.0, digitNumber(z) - j * 1.0).toInt()) % 10
+        }
+        z = x + y
+        y = x
+        x = z
+    }
+    return result
+}*/
