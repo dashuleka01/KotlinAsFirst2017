@@ -69,7 +69,7 @@ fun main(args: Array<String>) {
 fun dateStrToDigit(str: String): String {
     if(str.length > 16) return ""
     val parts = str.split(" ")
-    if(parts.size != 3)  return ""
+    if(parts.size != 3 || parts[2].length != 4)  return ""
     var result = ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
@@ -103,7 +103,7 @@ fun dateStrToDigit(str: String): String {
 fun dateDigitToStr(digital: String): String {
     if(digital.length != 10) return ""
     val parts = digital.split(".")
-    if(parts.size != 3) return ""
+    if(parts.size != 3  || parts[2].length != 4) return ""
     var result = ""
     var day = parts[0]
     var month = ""
