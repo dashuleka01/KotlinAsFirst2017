@@ -67,6 +67,7 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
+    if(str.length > 16) return ""
     val parts = str.split(" ")
     if(parts.size != 3)  return ""
     var result = ""
@@ -107,7 +108,6 @@ fun dateDigitToStr(digital: String): String {
     var day = parts[0]
     var month = ""
     val year = parts[2]
-    if(year.length != 4) return ""
     when {
         parts[1] == "01" -> month = "января"
         parts[1] == "02" -> month = "февраля"
@@ -124,7 +124,7 @@ fun dateDigitToStr(digital: String): String {
     }
     if(day == "01" || day == "02" || day == "03" || day == "04" || day == "05" ||
             day == "06" || day == "07" || day == "08" || day == "09") day = day.drop(1)
-    return if(day == "" || month == "" || year == "") ""
+    return if(day == "" || month == "" || year == "" || year.length != 4) ""
     else "$day $month $year"
 }
 
@@ -141,6 +141,7 @@ fun dateDigitToStr(digital: String): String {
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
+    if(phone.length == 0) return ""
     var result = ""
     if(phone[0].toString() == "+") result += "+"
     for(i in phone){
