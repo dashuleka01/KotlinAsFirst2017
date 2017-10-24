@@ -66,36 +66,30 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()/*{
+fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
+    if(parts.size != 3)  return ""
     var result = ""
     val day = twoDigitStr(parts[0].toInt())
-    var month: String? = ""
+    var month = ""
     val year = parts[2]
-
-    try {
-        when {
-            parts[1] == "января" -> month = "01."
-            parts[1] == "февраля" -> month = "02."
-            parts[1] == "марта" -> month = "03."
-            parts[1] == "апреля" -> month = "04."
-            parts[1] == "мая" -> month = "05."
-            parts[1] == "июня" -> month = "06."
-            parts[1] == "июля" -> month = "07."
-            parts[1] == "августа" -> month = "08."
-            parts[1] == "сентября" -> month = "09."
-            parts[1] == "октября" -> month = "10."
-            parts[1] == "ноября" -> month = "11."
-            parts[1] == "декабря" -> month = "12."
-        }
-        return if(month == "") ""
-        else "$day.$month$year"
+    when {
+        parts[1] == "января" -> month = "01."
+        parts[1] == "февраля" -> month = "02."
+        parts[1] == "марта" -> month = "03."
+        parts[1] == "апреля" -> month = "04."
+        parts[1] == "мая" -> month = "05."
+        parts[1] == "июня" -> month = "06."
+        parts[1] == "июля" -> month = "07."
+        parts[1] == "августа" -> month = "08."
+        parts[1] == "сентября" -> month = "09."
+        parts[1] == "октября" -> month = "10."
+        parts[1] == "ноября" -> month = "11."
+        parts[1] == "декабря" -> month = "12."
     }
-    catch(e: IndexOutOfBoundsException){
-        throw e
-    }
-
-}*/
+    return if(day == "" || month == "" || year == "") ""
+    else "$day.$month$year"
+}
 
 /**
  * Средняя
@@ -104,7 +98,32 @@ fun dateStrToDigit(str: String): String = TODO()/*{
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val parts = digital.split(".")
+    if(parts.size != 3)  return ""
+    var result = ""
+    var day = parts[0]
+    var month = ""
+    val year = parts[2]
+    when {
+        parts[1] == "01" -> month = "января"
+        parts[1] == "02" -> month = "февраля"
+        parts[1] == "03" -> month = "марта"
+        parts[1] == "04" -> month = "апреля"
+        parts[1] == "05" -> month = "мая"
+        parts[1] == "06" -> month = "июня"
+        parts[1] == "07" -> month = "июля"
+        parts[1] == "08" -> month = "августа"
+        parts[1] == "09" -> month = "сентября"
+        parts[1] == "10" -> month = "октября"
+        parts[1] == "11" -> month = "ноября"
+        parts[1] == "12" -> month = "декабря"
+    }
+    if(day == "01" || day == "02" || day == "03" || day == "04" || day == "05" ||
+            day == "06" || day == "07" || day == "08" || day == "09") day = day.drop(1)
+    return if(day == "" || month == "" || year == "") ""
+    else "$day $month $year"
+}
 
 /**
  * Средняя

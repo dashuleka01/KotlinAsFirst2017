@@ -381,11 +381,21 @@ fun decimalFromString(str: String, base: Int): Int {
 fun roman(n: Int): String = TODO()/*{
     var list = mutableListOf<Int>()
     var liststr = mutableListOf<String>()
+    var result = ""
     var num = n
     var a = 0.0
     while(num > 0){
         list.add(num % 10 * pow(10.0, a).toInt())
         num /= 10
+        a++
+    }
+    for(i in list){
+        if(i in 1..9){
+            when{
+                i in
+
+            }
+        }
     }
 }*/
 
@@ -396,4 +406,33 @@ fun roman(n: Int): String = TODO()/*{
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String = TODO()/*{
+    var num = n
+    var list1 = mutableListOf<Int>(0, 0, 0)//mutableListOf<Int>() //правые 3 цифры
+    var list2 = mutableListOf<Int>(0, 0, 0) //левые 3 цифры
+    var result = ""
+    for(i in 0..2){
+        list1[2 - i] = num % 10 * pow(10.0, i * 1.0).toInt()
+        num /= 10
+    }
+    for(i in 0..2){
+        list2[2 - i] = num % 10 * pow(10.0, i * 1.0).toInt()
+        num /= 10
+    }
+    for(i in list2){
+        when{
+            i == 1 -> result += "одна"
+            i == 2 -> result += "две"
+            i == 3 -> result += "три"
+            i == 4 -> result += "четыре"
+            i == 5 -> result += "пять"
+            i == 6 -> result += "шесть"
+            i == 7 -> result += "семь"
+            i == 8 -> result += "восемь"
+            i == 9 -> result += "девять"
+            i == 10 -> result += "десять"
+
+
+        }
+    }
+}*/
