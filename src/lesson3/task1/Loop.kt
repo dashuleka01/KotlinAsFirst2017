@@ -188,14 +188,14 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  */
 
 fun sin(x: Double, eps: Double): Double {
-    var x1 = x
+    val x1 = x % (2 * PI)
     var i = 1.0
     var sin = 0.0
     var sign = 0.0
     var a = 0.0
-    x1 = x % (2 * PI)
     do {
         a = (pow(x1, i) / factorial(i.toInt())) * pow(-1.0, sign)
+        if(abs(a) < eps) break
         sin += a
         i += 2
         sign++
@@ -214,11 +214,11 @@ fun cos(x: Double, eps: Double): Double {
     var cos = 1.0
     var flag = 0
     var i = 2
-    var x1 = x
+    val x1 = x % (2 * PI)
     var a = 0.0
-    x1 = x % (2 * PI)
     do {
         a = pow(x1, i.toDouble()) / factorial(i)
+        if(abs(a) < eps) break
         if (flag == 0) {
             cos -= a
             flag = 1
@@ -290,19 +290,20 @@ fun hasDifferentDigits(n: Int): Boolean {
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()/*{
+fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var result = 0
+    var num = 0
     for(i in 1..n){
-        for(j in 1..digitNumber(i * i)){
+        num = i * i
+        for(j in 1..digitNumber(num)){
             count++
             if(count == n)
-                result = (i * i / pow(10.0, digitNumber(i * i) - j * 1.0).toInt()) % 10
+                result = (num / pow(10.0, digitNumber(num) - j * 1.0).toInt()) % 10
         }
     }
     return result
-
-}*/
+}
 
 /**
  * Сложная
@@ -311,7 +312,7 @@ fun squareSequenceDigit(n: Int): Int = TODO()/*{
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()/*{
+fun fibSequenceDigit(n: Int): Int {
     var x = 1
     var y = 0
     var z = x + y
@@ -328,4 +329,4 @@ fun fibSequenceDigit(n: Int): Int = TODO()/*{
         x = z
     }
     return result
-}*/
+}
