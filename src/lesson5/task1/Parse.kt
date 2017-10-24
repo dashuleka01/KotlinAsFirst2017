@@ -68,11 +68,12 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
-    if(parts.size != 3 || parts[2].length != 4)  return ""
+    if(parts.size != 3)  return ""
     var result = ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
     val year = parts[2]
+    if(year.length != 4) return ""
     when {
         parts[1] == "января" -> month = "01."
         parts[1] == "февраля" -> month = "02."
@@ -106,6 +107,7 @@ fun dateDigitToStr(digital: String): String {
     var day = parts[0]
     var month = ""
     val year = parts[2]
+    if(year.length != 4) return ""
     when {
         parts[1] == "01" -> month = "января"
         parts[1] == "02" -> month = "февраля"
@@ -138,11 +140,28 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()/*{
+fun flattenPhoneNumber(phone: String): String {
     var result = ""
     if(phone[0].toString() == "+") result += "+"
-    for(i in 1..phone.length - 1)
-}*/
+    for(i in phone){
+        when{
+            i.toString() == "+" || i.toString() == "-" -> result += ""
+            i.toString() == "(" || i.toString() == ")" || i.toString() == " "-> result += ""
+            i.toString() == "0" -> result += "0"
+            i.toString() == "1" -> result += "1"
+            i.toString() == "2" -> result += "2"
+            i.toString() == "3" -> result += "3"
+            i.toString() == "4" -> result += "4"
+            i.toString() == "5" -> result += "5"
+            i.toString() == "6" -> result += "6"
+            i.toString() == "7" -> result += "7"
+            i.toString() == "8" -> result += "8"
+            i.toString() == "9" -> result += "9"
+            else -> return ""
+        }
+    }
+    return result
+}
 
 /**
  * Средняя
