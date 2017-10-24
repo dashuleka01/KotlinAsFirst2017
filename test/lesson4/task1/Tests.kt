@@ -173,6 +173,8 @@ class Tests {
         assertEquals(listOf(1, 3, 12), convert(250, 14))
         assertEquals(listOf(2, 14, 12), convert(1000, 19))
         assertEquals(listOf(35),convert(35, 36))
+        assertEquals(listOf(0),convert(0, 583))
+
     }
 
     @Test

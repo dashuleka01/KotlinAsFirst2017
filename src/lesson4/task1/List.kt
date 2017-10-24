@@ -212,7 +212,7 @@ fun factorize(n: Int): List<Int> {
         list.add(n)
     }
     else{
-        for(i in 2..sqrt(n.toDouble()).toInt() + 1) {
+        for(i in 2..n / 2) {
             while (num % i == 0) {
                 num /= i
                 list.add(i)
@@ -247,13 +247,18 @@ fun convert(n: Int, base: Int): List<Int> {
     var list = mutableListOf<Int>()
     var resultList = mutableListOf<Int>()
     var  num = n
-    while(num > 0) {
-        list.add(num % base)
-        num /= base
+    if(n == 0) {
+        resultList.add(0)
     }
-    val sizeList = list.size - 1
-    for(i in 0..sizeList){
-        resultList.add(list[sizeList - i])
+    else {
+        while(num > 0) {
+            list.add(num % base)
+            num /= base
+        }
+        val sizeList = list.size - 1
+        for(i in 0..sizeList){
+            resultList.add(list[sizeList - i])
+        }
     }
     return resultList
 }
