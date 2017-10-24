@@ -100,7 +100,7 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".")
-    if(parts.size != 3)  return ""
+    if(parts.size != 3 || digital.length != 10)  return ""
     var result = ""
     var day = parts[0]
     var month = ""
