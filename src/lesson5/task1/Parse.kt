@@ -69,28 +69,27 @@ fun main(args: Array<String>) {
 fun dateStrToDigit(str: String): String {
     if(str.length > 16) return ""
     val parts = str.split(" ")
-    if(parts.size != 3 || parts[2].length != 4)  return ""
+    if(parts.size != 3)  return ""
     var result = ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
     val year = parts[2]
-    if(year.length != 4) return ""
     when {
-        parts[1] == "января" -> month = "01."
-        parts[1] == "февраля" -> month = "02."
-        parts[1] == "марта" -> month = "03."
-        parts[1] == "апреля" -> month = "04."
-        parts[1] == "мая" -> month = "05."
-        parts[1] == "июня" -> month = "06."
-        parts[1] == "июля" -> month = "07."
-        parts[1] == "августа" -> month = "08."
-        parts[1] == "сентября" -> month = "09."
-        parts[1] == "октября" -> month = "10."
-        parts[1] == "ноября" -> month = "11."
-        parts[1] == "декабря" -> month = "12."
+        parts[1] == "января" -> month = "01"
+        parts[1] == "февраля" -> month = "02"
+        parts[1] == "марта" -> month = "03"
+        parts[1] == "апреля" -> month = "04"
+        parts[1] == "мая" -> month = "05"
+        parts[1] == "июня" -> month = "06"
+        parts[1] == "июля" -> month = "07"
+        parts[1] == "августа" -> month = "08"
+        parts[1] == "сентября" -> month = "09"
+        parts[1] == "октября" -> month = "10"
+        parts[1] == "ноября" -> month = "11"
+        parts[1] == "декабря" -> month = "12"
     }
     return if(day == "" || month == "" || year == "") ""
-    else "$day.$month$year"
+    else "$day.$month.$year"
 }
 
 /**
@@ -103,7 +102,7 @@ fun dateStrToDigit(str: String): String {
 fun dateDigitToStr(digital: String): String {
     if(digital.length != 10) return ""
     val parts = digital.split(".")
-    if(parts.size != 3  || parts[2].length != 4) return ""
+    if(parts.size != 3) return ""
     var result = ""
     var day = parts[0]
     var month = ""

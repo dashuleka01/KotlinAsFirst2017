@@ -208,11 +208,11 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
 fun factorize(n: Int): List<Int> {
     var num = n
     var list = mutableListOf<Int>()
-    if(isPrime(n)){
+    if (isPrime(n)){
         list.add(n)
     }
     else{
-        for(i in 2..n / 2) {
+        for (i in 2..n / 2) {
             while (num % i == 0) {
                 num /= i
                 list.add(i)
@@ -228,13 +228,8 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String {
-    val list = factorize(n)
-    var result = ""
-    for(i in list)
-        result += "$i*"
-    return result.dropLast(1)
-}
+fun factorizeToString(n: Int): String  = factorize(n).joinToString (separator = "*")
+
 
 /**
  * Средняя
@@ -245,22 +240,17 @@ fun factorizeToString(n: Int): String {
  */
 fun convert(n: Int, base: Int): List<Int> {
     var list = mutableListOf<Int>()
-    var resultList = mutableListOf<Int>()
     var  num = n
-    if(n == 0) {
-        resultList.add(0)
+    if (n == 0) {
+        list.add(0)
     }
     else {
-        while(num > 0) {
+        while (num > 0) {
             list.add(num % base)
             num /= base
         }
-        val sizeList = list.size - 1
-        for(i in 0..sizeList){
-            resultList.add(list[sizeList - i])
-        }
     }
-    return resultList
+    return list.reversed()
 }
 
 /**
@@ -378,26 +368,7 @@ fun decimalFromString(str: String, base: Int): Int {
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()/*{
-    var list = mutableListOf<Int>()
-    var liststr = mutableListOf<String>()
-    var result = ""
-    var num = n
-    var a = 0.0
-    while(num > 0){
-        list.add(num % 10 * pow(10.0, a).toInt())
-        num /= 10
-        a++
-    }
-    for(i in list){
-        if(i in 1..9){
-            when{
-                i in
-
-            }
-        }
-    }
-}*/
+fun roman(n: Int): String = TODO()
 
 /**
  * Очень сложная
@@ -406,33 +377,4 @@ fun roman(n: Int): String = TODO()/*{
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()/*{
-    var num = n
-    var list1 = mutableListOf<Int>(0, 0, 0)//mutableListOf<Int>() //правые 3 цифры
-    var list2 = mutableListOf<Int>(0, 0, 0) //левые 3 цифры
-    var result = ""
-    for(i in 0..2){
-        list1[2 - i] = num % 10 * pow(10.0, i * 1.0).toInt()
-        num /= 10
-    }
-    for(i in 0..2){
-        list2[2 - i] = num % 10 * pow(10.0, i * 1.0).toInt()
-        num /= 10
-    }
-    for(i in list2){
-        when{
-            i == 1 -> result += "одна"
-            i == 2 -> result += "две"
-            i == 3 -> result += "три"
-            i == 4 -> result += "четыре"
-            i == 5 -> result += "пять"
-            i == 6 -> result += "шесть"
-            i == 7 -> result += "семь"
-            i == 8 -> result += "восемь"
-            i == 9 -> result += "девять"
-            i == 10 -> result += "десять"
-
-
-        }
-    }
-}*/
+fun russian(n: Int): String = TODO()
