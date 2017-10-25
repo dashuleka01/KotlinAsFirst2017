@@ -67,7 +67,6 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    if(str.length > 16) return ""
     val parts = str.split(" ")
     if(parts.size != 3)  return ""
     var result = ""
@@ -100,7 +99,6 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    if(digital.length != 10) return ""
     val parts = digital.split(".")
     if(parts.size != 3) return ""
     var result = ""
