@@ -108,6 +108,7 @@ class Tests {
         assertEquals(2124679 , minDivisor(2124679 ))
         assertEquals(1073676287, minDivisor(1073676287))
         assertEquals(Int.MAX_VALUE, minDivisor(Int.MAX_VALUE))
+        assertEquals(17, minDivisor(17))
     }
 
     @Test

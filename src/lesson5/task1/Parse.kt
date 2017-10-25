@@ -124,7 +124,7 @@ fun dateDigitToStr(digital: String): String {
     }
     if(day == "01" || day == "02" || day == "03" || day == "04" || day == "05" ||
             day == "06" || day == "07" || day == "08" || day == "09") day = day.drop(1)
-    return if(day == "" || month == "" || year == "" || year.length != 4) ""
+    return if(day == "" || month == "" || year == "") ""
     else "$day $month $year"
 }
 
@@ -174,7 +174,20 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int = TODO()/*{
+    val list = jumps.split(" ")
+    val resultList = //mutableListOf<Int>()
+    var a = 0
+    var result = 0
+    for(i in list) {
+        when {
+            i == "%" -> a++
+            i == "-" -> a++
+            i.toInt() > 500 -> resultList.add(i.toInt())
+            else -> return -1
+        }
+    }
+}*/
 
 /**
  * Сложная

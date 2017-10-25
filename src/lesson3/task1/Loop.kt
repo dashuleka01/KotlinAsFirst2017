@@ -82,7 +82,7 @@ fun fib(n: Int): Int {
     var x = 1
     var y = 0
     var z = x + y
-    for(i in 2..n){
+    for (i in 2..n){
         z = x + y
         y = x
         x = z
@@ -98,11 +98,6 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-   /* var i = 1
-    while(i % m != 0 || i % n != 0) {
-        i++
-    }
-    return i*/
     return m * n / ncd(m, n)
 }
 
@@ -112,7 +107,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-   for(i in 2..n / 2) {
+   for (i in 2..n) {
        if (n % i == 0) return i
    }
     return n
@@ -124,7 +119,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for(i in (n - 1) downTo 2) {
+    for (i in (n - 1) downTo 2) {
         if (n % i == 0) return i
     }
     return 1
@@ -154,13 +149,6 @@ fun ncd (m: Int, n: Int): Int{
 }
 
 fun isCoPrime(m: Int, n: Int): Boolean {
-   /* val maxNum = max(m, n)
-    var result = true
-    for(i in 2..maxNum){
-        if(m % i == 0 && n % i == 0)
-            result = false
-    }
-    return result*/
     return ncd(m, n) == 1
 }
 
@@ -172,7 +160,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for(k in sqrt(m.toDouble()).toInt()..sqrt(n.toDouble()).toInt()){
+    for (k in sqrt(m.toDouble()).toInt()..sqrt(n.toDouble()).toInt()){
         if (k * k in m..n)
             return true
     }
@@ -189,12 +177,12 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
 
 fun sin(x: Double, eps: Double): Double {
     val x1 = x % (2 * PI)
-    var i = 1.0
+    var i = 1
     var sin = 0.0
     var sign = 0.0
     var a = 0.0
     do {
-        a = (pow(x1, i) / factorial(i.toInt())) * pow(-1.0, sign)
+        a = (pow(x1, i.toDouble()) / factorial(i)) * pow(-1.0, sign)
         if(abs(a) < eps) break
         sin += a
         i += 2
@@ -239,17 +227,12 @@ fun cos(x: Double, eps: Double): Double {
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    var digitCount = 0.0
+    var digitCount = digitNumber(n)
     var num = n
     var result = 0
-    while (num > 0){
-        digitCount++
-        num /= 10
-    }
-    num = n
     while (digitCount > 0){
         digitCount--
-        result += pow(10.0, digitCount).toInt() * (num % 10)
+        result += pow(10.0, digitCount.toDouble()).toInt() * (num % 10)
         num /= 10
     }
     return result
