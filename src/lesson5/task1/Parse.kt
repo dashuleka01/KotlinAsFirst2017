@@ -68,7 +68,7 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
-    if(parts.size != 3 || parts[2].contains(Regex("""[a-b]""")))  return ""
+    if(parts.size != 3 || parts[0].contains(Regex("""[a-b]""")) || parts[2].contains(Regex("""[a-b]""")))  return ""
     var result = ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
