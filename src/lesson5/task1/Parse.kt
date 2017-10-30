@@ -138,25 +138,9 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     if(phone.length == 0) return ""
-    var result = ""
-    if(phone[0].toString() == "+") result += "+"
-    for(i in phone){
-        when{
-            i.toString() == "+" || i.toString() == "-" -> result += ""
-            i.toString() == "(" || i.toString() == ")" || i.toString() == " "-> result += ""
-            i.toString() == "0" -> result += "0"
-            i.toString() == "1" -> result += "1"
-            i.toString() == "2" -> result += "2"
-            i.toString() == "3" -> result += "3"
-            i.toString() == "4" -> result += "4"
-            i.toString() == "5" -> result += "5"
-            i.toString() == "6" -> result += "6"
-            i.toString() == "7" -> result += "7"
-            i.toString() == "8" -> result += "8"
-            i.toString() == "9" -> result += "9"
-            else -> return ""
-        }
-    }
+    if(phone.contains(Regex("""[a-z]|\w\+"""))) return ""
+    var result = phone
+    result = Regex("""-|\(|\)|\s""").replace(result, "")
     return result
 }
 
