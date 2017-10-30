@@ -160,7 +160,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for (k in sqrt(m.toDouble()).toInt()..sqrt(n.toDouble()).toInt()){
+    for (k in round(sqrt(m.toDouble())) - 1..round(sqrt(n.toDouble())) + 1){
         if (k * k in m..n)
             return true
     }
@@ -200,21 +200,15 @@ fun sin(x: Double, eps: Double): Double {
  */
 fun cos(x: Double, eps: Double): Double {
     var cos = 1.0
-    var flag = 0
+    var flag = -1
     var i = 2
     val x1 = x % (2 * PI)
     var a = 0.0
     do {
-        a = pow(x1, i.toDouble()) / factorial(i)
+        a = pow(x1, i.toDouble()) / factorial(i) * flag
         if(abs(a) < eps) break
-        if (flag == 0) {
-            cos -= a
-            flag = 1
-        }
-        else {
-            cos += a
-            flag = 0
-        }
+        cos += a
+        flag = - flag
         i += 2
     } while(abs(a) >= abs(eps))
     return cos

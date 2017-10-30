@@ -39,6 +39,7 @@ class Tests {
         assertEquals("", dateStrToDigit("23"))
         assertEquals("03.04.2011", dateStrToDigit("3 апреля 2011"))
         assertEquals("", dateStrToDigit("p|RfIG>J,%Nf5P9ozEt-0Z.1!,sbD^KofohT?b.K3 G>H!0hc?Xq9-O|`+)'kL7Rt@Mb7}QD@UUon>.}C)1LPrS>Qt\\tvC=6#-&2R)y>r,9>gI#PuMC-i*twAsm<319yH\\nF0A\\\\7AzK%a7#GJA\\\\!CKI\\ttOC(!Lqc}g7Fe{^@+))UAfB[CPo; MrRhjtF(,yb'LmZf+0\\nQ{SV\\\"XdRd*dC\\tE}4n1F:"))
+        assertEquals("", dateStrToDigit("&}D~J%\\\\yN[FtPOKr(v}&T()eJ4!Gi^]z7-!\\\"#\\\\)V?XLt%wLm\$}y8/.x-UszrB=\\\"S*Ki#h1VdU;{?vO9.?3>7~[x2{7MxN0K/X~8:x*5~\$\\\"}:+;Y.\\\\|f:dF3=\\tZ~ mv?\\\\\\\\+?LjIz`^t,|wcnac=V&ovg+Ui*5Y<iN#%_ 9\\n4n7k\\\"XzFW*,/"))
     }
 
     @Test

@@ -119,8 +119,7 @@ fun dateDigitToStr(digital: String): String {
         parts[1] == "11" -> month = "ноября"
         parts[1] == "12" -> month = "декабря"
     }
-    if(day == "01" || day == "02" || day == "03" || day == "04" || day == "05" ||
-            day == "06" || day == "07" || day == "08" || day == "09") day = day.drop(1)
+    if (day.contains(Regex("""0\d"""))) day = day.drop(1)
     return if(day == "" || month == "" || year == "") ""
     else "$day $month $year"
 }
