@@ -260,35 +260,8 @@ fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     var result = ""
     for (i in list) {
-        when {
-            i == 10 -> result += "a"
-            i == 11 -> result += "b"
-            i == 12 -> result += "c"
-            i == 13 -> result += "d"
-            i == 14 -> result += "e"
-            i == 15 -> result += "f"
-            i == 16 -> result += "g"
-            i == 17 -> result += "h"
-            i == 18 -> result += "i"
-            i == 19 -> result += "j"
-            i == 20 -> result += "k"
-            i == 21 -> result += "l"
-            i == 22 -> result += "m"
-            i == 23 -> result += "n"
-            i == 24 -> result += "o"
-            i == 25 -> result += "p"
-            i == 26 -> result += "q"
-            i == 27 -> result += "r"
-            i == 28 -> result += "s"
-            i == 29 -> result += "t"
-            i == 30 -> result += "u"
-            i == 31 -> result += "v"
-            i == 32 -> result += "w"
-            i == 33 -> result += "x"
-            i == 34 -> result += "y"
-            i == 35 -> result += "z"
-            else -> result += i.toString()
-        }
+        if (i > 9) result += ('a' + i - 10).toString()
+        else result += i.toString()
     }
     return result
 }
@@ -319,35 +292,9 @@ fun decimal(digits: List<Int>, base: Int): Int {
 fun decimalFromString(str: String, base: Int): Int {
     var list = mutableListOf<Int>()
     for (i in str) {
-        when {
-            "a" in i.toString() -> list.add(10)
-            "b" in i.toString() -> list.add(11)
-            "c" in i.toString() -> list.add(12)
-            "d" in i.toString() -> list.add(13)
-            "e" in i.toString() -> list.add(14)
-            "f" in i.toString() -> list.add(15)
-            "g" in i.toString() -> list.add(16)
-            "h" in i.toString() -> list.add(17)
-            "i" in i.toString() -> list.add(18)
-            "j" in i.toString() -> list.add(19)
-            "k" in i.toString() -> list.add(20)
-            "l" in i.toString() -> list.add(21)
-            "m" in i.toString() -> list.add(22)
-            "n" in i.toString() -> list.add(23)
-            "o" in i.toString() -> list.add(24)
-            "p" in i.toString() -> list.add(25)
-            "q" in i.toString() -> list.add(26)
-            "r" in i.toString() -> list.add(27)
-            "s" in i.toString() -> list.add(28)
-            "t" in i.toString() -> list.add(29)
-            "u" in i.toString() -> list.add(30)
-            "v" in i.toString() -> list.add(31)
-            "w" in i.toString() -> list.add(32)
-            "x" in i.toString() -> list.add(33)
-            "y" in i.toString() -> list.add(34)
-            "z" in i.toString() -> list.add(35)
-            else -> list.add((i.toString()).toInt())
-        }
+        if(i.toString().contains(Regex("""[a-z]""")))
+          list.add(i.toInt() - 87)
+        else list.add((i.toString()).toInt())
     }
     return decimal(list, base)
 }
