@@ -188,7 +188,7 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
     if(list.size != 0){
         var sum = list[0]
         var current = 0.0
-        for(i in 1..list.size - 1){
+        for (i in 1..list.size - 1) {
             current = list[i]
             list[i] += sum
             sum += current
@@ -208,15 +208,10 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
 fun factorize(n: Int): List<Int> {
     var num = n
     var list = mutableListOf<Int>()
-    if (isPrime(n)){
-        list.add(n)
-    }
-    else{
-        for (i in 2..n / 2) {
-            while (num % i == 0) {
-                num /= i
-                list.add(i)
-            }
+    for (i in 2..n) {
+        while (num % i == 0) {
+            num /= i
+            list.add(i)
         }
     }
     return list

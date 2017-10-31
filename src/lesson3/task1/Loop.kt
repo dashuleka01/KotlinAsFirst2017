@@ -82,7 +82,7 @@ fun fib(n: Int): Int {
     var x = 1
     var y = 0
     var z = x + y
-    for (i in 2..n){
+    for (i in 2..n) {
         z = x + y
         y = x
         x = z
@@ -107,7 +107,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-   for (i in 2..n) {
+   for (i in 2..sqrt(n.toDouble()).toInt()) {
        if (n % i == 0) return i
    }
     return n
@@ -137,7 +137,7 @@ fun ncd (m: Int, n: Int): Int{
     var result = 1
     var nNum = n
     var mNum = m
-    while(i <= min(mNum,nNum)) {
+    while (i <= min(mNum,nNum)) {
         if (mNum % i == 0 && nNum % i == 0) {
             result *= i
             nNum /= i
@@ -160,7 +160,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for (k in round(sqrt(m.toDouble())) - 1..round(sqrt(n.toDouble())) + 1){
+    for (k in round(sqrt(m.toDouble())) - 1..round(sqrt(n.toDouble())) + 1) {
         if (k * k in m..n)
             return true
     }
@@ -180,14 +180,13 @@ fun sin(x: Double, eps: Double): Double {
     var i = 1
     var sin = 0.0
     var sign = 0.0
-    var a = 0.0
-    do {
-        a = (pow(x1, i.toDouble()) / factorial(i)) * pow(-1.0, sign)
-        if(abs(a) < eps) break
+    var a = (pow(x1, i.toDouble()) / factorial(i)) * pow(-1.0, sign)
+    while (abs(a) >= eps) {
         sin += a
         i += 2
         sign++
-    } while(abs(a) >= eps)
+        a = (pow(x1, i.toDouble()) / factorial(i)) * pow(-1.0, sign)
+    }
     return sin
 }
 
@@ -224,9 +223,8 @@ fun revert(n: Int): Int {
     var digitCount = digitNumber(n)
     var num = n
     var result = 0
-    while (digitCount > 0){
-        digitCount--
-        result += pow(10.0, digitCount.toDouble()).toInt() * (num % 10)
+    for (i in 1..digitCount) {
+        result += pow(10.0, digitCount.toDouble() - i).toInt() * (num % 10)
         num /= 10
     }
     return result
@@ -253,7 +251,7 @@ fun isPalindrome(n: Int): Boolean {
 fun hasDifferentDigits(n: Int): Boolean {
     var firstNum = n % 10
     var num = n / 10
-    while(num > 0){
+    while (num > 0) {
         if(num % 10 != firstNum) return true
         num /= 10
     }
@@ -271,9 +269,9 @@ fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var result = 0
     var num = 0
-    for(i in 1..n){
+    for (i in 1..n) {
         num = i * i
-        for(j in 1..digitNumber(num)){
+        for (j in 1..digitNumber(num)) {
             count++
             if(count == n)
                 result = (num / pow(10.0, digitNumber(num) - j * 1.0).toInt()) % 10
@@ -295,10 +293,10 @@ fun fibSequenceDigit(n: Int): Int {
     var z = x + y
     var count = 0
     var result = 0
-    while(result == 0){
-        for(j in 1..digitNumber(z)){
+    while (result == 0) {
+        for (j in 1..digitNumber(z)) {
             count++
-            if(count == n)
+            if (count == n)
                 result = (z / pow(10.0, digitNumber(z) - j * 1.0).toInt()) % 10
         }
         z = x + y

@@ -68,24 +68,23 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
-    if(parts.size != 3 || parts[0].contains(Regex("""[a-b]""")) || parts[2].contains(Regex("""[a-b]""")))  return ""
-    var result = ""
+    if(parts.size != 3 || parts[0].contains(Regex("""[a-z]""")) || parts[2].contains(Regex("""[a-z]""")))  return ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
     val year = parts[2]
-    when {
-        parts[1] == "января" -> month = "01"
-        parts[1] == "февраля" -> month = "02"
-        parts[1] == "марта" -> month = "03"
-        parts[1] == "апреля" -> month = "04"
-        parts[1] == "мая" -> month = "05"
-        parts[1] == "июня" -> month = "06"
-        parts[1] == "июля" -> month = "07"
-        parts[1] == "августа" -> month = "08"
-        parts[1] == "сентября" -> month = "09"
-        parts[1] == "октября" -> month = "10"
-        parts[1] == "ноября" -> month = "11"
-        parts[1] == "декабря" -> month = "12"
+    when (parts[1]) {
+        "января" -> month = "01"
+        "февраля" -> month = "02"
+        "марта" -> month = "03"
+        "апреля" -> month = "04"
+        "мая" -> month = "05"
+        "июня" -> month = "06"
+        "июля" -> month = "07"
+        "августа" -> month = "08"
+        "сентября" -> month = "09"
+        "октября" -> month = "10"
+        "ноября" -> month = "11"
+        "декабря" -> month = "12"
     }
     return if(day == "" || month == "" || year == "") ""
     else "$day.$month.$year"
@@ -105,19 +104,19 @@ fun dateDigitToStr(digital: String): String {
     var day = parts[0]
     var month = ""
     val year = parts[2]
-    when {
-        parts[1] == "01" -> month = "января"
-        parts[1] == "02" -> month = "февраля"
-        parts[1] == "03" -> month = "марта"
-        parts[1] == "04" -> month = "апреля"
-        parts[1] == "05" -> month = "мая"
-        parts[1] == "06" -> month = "июня"
-        parts[1] == "07" -> month = "июля"
-        parts[1] == "08" -> month = "августа"
-        parts[1] == "09" -> month = "сентября"
-        parts[1] == "10" -> month = "октября"
-        parts[1] == "11" -> month = "ноября"
-        parts[1] == "12" -> month = "декабря"
+    when (parts[1]) {
+        "01" -> month = "января"
+        "02" -> month = "февраля"
+        "03" -> month = "марта"
+        "04" -> month = "апреля"
+        "05" -> month = "мая"
+        "06" -> month = "июня"
+        "07" -> month = "июля"
+        "08" -> month = "августа"
+        "09" -> month = "сентября"
+        "10" -> month = "октября"
+        "11" -> month = "ноября"
+        "12" -> month = "декабря"
     }
     if (day.contains(Regex("""0\d"""))) day = day.drop(1)
     return if(day == "" || month == "" || year == "") ""
@@ -138,7 +137,7 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     if(phone.length == 0) return ""
-    if(phone.contains(Regex("""[a-z]|\w\+"""))) return ""
+    if(phone.contains(Regex("""[^0-9\+\(\)\s-]"""))) return ""  //|[a-z]|\w\+
     var result = phone
     result = Regex("""-|\(|\)|\s""").replace(result, "")
     return result
@@ -154,20 +153,7 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()/*{
-    val list = jumps.split(" ")
-    val resultList = //mutableListOf<Int>()
-    var a = 0
-    var result = 0
-    for(i in list) {
-        when {
-            i == "%" -> a++
-            i == "-" -> a++
-            i.toInt() > 500 -> resultList.add(i.toInt())
-            else -> return -1
-        }
-    }
-}*/
+fun bestLongJump(jumps: String): Int = TODO()
 
 /**
  * Сложная
