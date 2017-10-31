@@ -111,7 +111,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var result = 0.0
-    for(i in v)
+    for (i in v)
         result += i * i
     return sqrt(result)
 }
@@ -123,8 +123,8 @@ fun abs(v: List<Double>): Double {
  */
 fun mean(list: List<Double>): Double{
     var result = 0.0
-    if(list.size == 0) return 0.0
-    for(i in list)
+    if (list.size == 0) return 0.0
+    for (i in list)
         result += i
     return result / list.size
 
@@ -140,7 +140,7 @@ fun mean(list: List<Double>): Double{
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     val meanValue = mean(list)
-    for(i in 0..list.size - 1)
+    for (i in 0..list.size - 1)
         list[i] -= meanValue
     return list
 }
@@ -154,7 +154,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Double>, b: List<Double>): Double {
     var result = 0.0
-    for(i in 0..a.size - 1)
+    for (i in 0..a.size - 1)
         result += a[i] * b[i]
     return result
 }
@@ -169,7 +169,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var result =  0.0
-    for(i in 0..p.size - 1)
+    for (i in 0..p.size - 1)
         result += p[i] * pow(x, i.toDouble())
     return result
 }
@@ -259,8 +259,8 @@ fun convert(n: Int, base: Int): List<Int> {
 fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     var result = ""
-    for(i in list){
-        when{
+    for (i in list) {
+        when {
             i == 10 -> result += "a"
             i == 11 -> result += "b"
             i == 12 -> result += "c"
@@ -318,8 +318,8 @@ fun decimal(digits: List<Int>, base: Int): Int {
  */
 fun decimalFromString(str: String, base: Int): Int {
     var list = mutableListOf<Int>()
-    for(i in str){
-        when{
+    for (i in str) {
+        when {
             "a" in i.toString() -> list.add(10)
             "b" in i.toString() -> list.add(11)
             "c" in i.toString() -> list.add(12)
