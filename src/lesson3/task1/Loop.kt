@@ -107,7 +107,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-   for (i in 2..sqrt(n.toDouble()).toInt()) {
+   for (i in 2..n / 2) {
        if (n % i == 0) return i
    }
     return n
@@ -119,7 +119,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for (i in (n - 1) downTo 2) {
+    for (i in n / 2 downTo 2) {
         if (n % i == 0) return i
     }
     return 1
@@ -247,7 +247,7 @@ fun hasDifferentDigits(n: Int): Boolean {
     var firstNum = n % 10
     var num = n / 10
     while (num > 0) {
-        if(num % 10 != firstNum) return true
+        if (num % 10 != firstNum) return true
         num /= 10
     }
     return false
@@ -263,10 +263,10 @@ fun hasDifferentDigits(n: Int): Boolean {
 fun squareSequenceDigit(n: Int): Int {
     var count = 0
     var num = 0
-    for (i in 1..n) {
+    var i = 1
+    while (count < n) {
         num = i * i
-        count += digitNumber(i * i)
-        if(count >= n) break
+        count += digitNumber(i * i++)
     }
     return (num / pow(10.0, count - n * 1.0).toInt()) % 10
 }
@@ -283,13 +283,11 @@ fun fibSequenceDigit(n: Int): Int {
     var y = 0
     var z = x + y
     var count = 0
-    var result = 0
-    while (result == 0) {
+    while (count + digitNumber(z) < n) {
         count += digitNumber(z)
-        if (count >= n) break
         z = x + y
         y = x
         x = z
     }
-    return (z / pow(10.0, count - n * 1.0).toInt()) % 10
+    return (z / pow(10.0, count + digitNumber(z) - n * 1.0).toInt()) % 10
 }
