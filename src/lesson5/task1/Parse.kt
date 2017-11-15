@@ -246,7 +246,7 @@ fun mostExpensive(description: String): String {
     val parts = description.split(" ")
     var price = mutableListOf<Double>()
     for (i in 1..parts.size - 1 step 2) {
-        if (parts[i].contains(Regex("""[0-9]""")) && parts[i].length != 0) price.add((parts[i].dropLast(1)).toDouble())
+        if (parts[i].contains(Regex("""[\d]"""))) price.add((parts[i].dropLast(1)).toDouble())
         else return ""
     }
     val result = price.indexOf(price.max())
