@@ -293,7 +293,7 @@ fun decimalFromString(str: String, base: Int): Int {
     var list = mutableListOf<Int>()
     for (i in str) {
         if (i.toString().contains(Regex("""[a-z]"""))) list.add(i.toInt() - 87)
-        else list.add((i.toString()).toInt())
+        else list.add(i.toInt() - 48)
     }
     return decimal(list, base)
 }

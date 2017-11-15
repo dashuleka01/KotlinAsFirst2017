@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 import java.lang.Math.*
@@ -36,7 +37,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -65,7 +66,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var result = 0
     var num = abs(n)
-    do{
+    do {
         result++
         num /= 10
     } while (num > 0)
@@ -107,9 +108,9 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-   for (i in 2..n / 2) {
-       if (n % i == 0) return i
-   }
+    for (i in 2..n / 2) {
+        if (n % i == 0) return i
+    }
     return n
 }
 
@@ -132,7 +133,7 @@ fun maxDivisor(n: Int): Int {
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun ncd (m: Int, n: Int): Int{
+fun ncd(m: Int, n: Int): Int {
     var nNum = n
     var mNum = m
     while (nNum != 0 && mNum != 0) {
@@ -153,8 +154,12 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean = !(sqrt(m.toDouble()).toInt() == sqrt(n.toDouble()).toInt()) || m <= 1 || n <= 1
-
+fun squareBetweenExists(m: Int, n: Int): Boolean {
+    for (k in round(sqrt(m.toDouble()))..round(sqrt(n.toDouble()))) {
+        if (k * k in m..n) return true
+    }
+    return false
+}
 
 /**
  * Средняя
@@ -191,14 +196,13 @@ fun cos(x: Double, eps: Double): Double {
     var flag = -1
     var i = 2
     val x1 = x % (2 * PI)
-    var a = 0.0
-    do {
-        a = pow(x1, i.toDouble()) / factorial(i) * flag
-        if(abs(a) < eps) break
+    var a = pow(x1, i.toDouble()) / factorial(i) * flag
+    while (abs(a) >= eps) {
         cos += a
-        flag = - flag
+        flag = -flag
         i += 2
-    } while(abs(a) >= abs(eps))
+        a = pow(x1, i.toDouble()) / factorial(i) * flag
+    }
     return cos
 }
 

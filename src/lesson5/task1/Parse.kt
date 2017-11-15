@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
 
 /**
@@ -48,12 +49,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -68,7 +67,7 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")
-    if(parts.size != 3 || parts[0].contains(Regex("""[^0-9]""")) || parts[2].contains(Regex("""[^0-9]""")))  return ""
+    if (parts.size != 3 || parts[0].contains(Regex("""[^0-9]""")) || parts[2].contains(Regex("""[^0-9]"""))) return ""
     val day = twoDigitStr(parts[0].toInt())
     var month = ""
     val year = parts[2]
@@ -86,7 +85,7 @@ fun dateStrToDigit(str: String): String {
         "ноября" -> month = "11"
         "декабря" -> month = "12"
     }
-    return if(day == "" || month == "" || year == "") ""
+    return if (day == "" || month == "" || year == "") ""
     else "$day.$month.$year"
 }
 
@@ -99,7 +98,7 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".")
-    if(parts.size != 3) return ""
+    if (parts.size != 3) return ""
     var result = ""
     var day = parts[0]
     var month = ""
@@ -119,7 +118,7 @@ fun dateDigitToStr(digital: String): String {
         "12" -> month = "декабря"
     }
     if (day.contains(Regex("""0\d"""))) day = day.drop(1)
-    return if(day == "" || month == "" || year == "") ""
+    return if (day == "" || month == "" || year == "") ""
     else "$day $month $year"
 }
 
@@ -153,7 +152,18 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var result = mutableListOf<Int>()
+    for (i in parts) {
+        when {
+            i == "-" || i == "%" -> result.add(-1)
+            i.contains(Regex("""[1-9]""")) -> result.add(i.toInt())
+            else -> return -1
+        }
+    }
+    return result.max() ?: -1
+}
 
 /**
  * Сложная
@@ -165,7 +175,14 @@ fun bestLongJump(jumps: String): Int = TODO()
  * Прочитать строку и вернуть максимальную взятую высоту (230 в примере).
  * При нарушении формата входной строки вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var result = mutableListOf<Int>()
+    for (i in 1..parts.size - 1) {
+        if (parts[i] == "+") result.add(parts[i - 1].toInt())
+    }
+    return result.max() ?: -1
+}
 
 /**
  * Сложная
@@ -176,7 +193,18 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    val parts = expression.split(" ")
+    var result = parts[0].toInt()
+    for (i in 1..parts.size - 1 step 2) {
+        when (parts[i]) {
+            "+" -> result += parts[i + 1].toInt()
+            "-" -> result -= parts[i + 1].toInt()
+            else -> throw IllegalArgumentException()
+        }
+    }
+    return result
+}
 
 /**
  * Сложная
