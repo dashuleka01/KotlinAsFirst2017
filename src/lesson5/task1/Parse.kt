@@ -158,7 +158,7 @@ fun bestLongJump(jumps: String): Int {
     for (i in parts) {
         when {
             i == "-" || i == "%" -> result.add(-1)
-            i.contains(Regex("""[1-9]""")) -> result.add(i.toInt())
+            i.contains(Regex("""[0-9]""")) -> result.add(i.toInt())
             else -> return -1
         }
     }
@@ -177,9 +177,10 @@ fun bestLongJump(jumps: String): Int {
  */
 fun bestHighJump(jumps: String): Int {
     val parts = jumps.split(" ")
+    if (parts[0].contains(Regex("""[\D]"""))) return -1
     var result = mutableListOf<Int>()
-    for (i in 1..parts.size - 1) {
-        if (parts[i] == "+") result.add(parts[i - 1].toInt())
+    for (i in 1..parts.size - 1 step 2) {
+        if (parts[i].contains(Regex("""\+"""))) result.add(parts[i - 1].toInt())
     }
     return result.max() ?: -1
 }
@@ -195,6 +196,7 @@ fun bestHighJump(jumps: String): Int {
  */
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
+    if (parts[0].contains(Regex("""[\D]"""))) throw IllegalArgumentException()
     var result = parts[0].toInt()
     for (i in 1..parts.size - 1 step 2) {
         when (parts[i]) {
@@ -215,7 +217,17 @@ fun plusMinus(expression: String): Int {
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val parts = str.split(" ")
+    var index = 0
+    for (i in 1..parts.size - 1) {
+        if (parts[i].toLowerCase() == parts[i - 1].toLowerCase()) {
+            return index
+        }
+        index += parts[i - 1].length + 1
+    }
+    return -1
+}
 
 /**
  * Сложная
