@@ -249,6 +249,7 @@ fun mostExpensive(description: String): String {
         if (parts[i].contains(Regex("""[\d]"""))) price.add((parts[i].dropLast(1)).toDouble())
         else return ""
     }
+    //if(price.max() == null) return ""
     val result = price.indexOf(price.max())
     return parts[result * 2]
 }
