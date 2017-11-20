@@ -171,8 +171,8 @@ class Line private constructor(val b: Double, val angle: Double) {
  * Построить прямую по отрезку
  */
 fun lineBySegment(s: Segment): Line {
-    val angle = Math.atan((s.end.y - s.begin.y) / (s.end.x - s.begin.x))
-    return Line(s.begin, angle)
+    val  ang = Math.acos((s.end.x - s.begin.x) / s.end.distance(s.begin))
+    return Line(s.begin, ang)
 }
 
 /**
@@ -189,11 +189,12 @@ fun lineByPoints(a: Point, b: Point): Line {
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()/*{
+fun bisectorByPoints(a: Point, b: Point): Line {
     val line  = lineByPoints(a, b)
     val point = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
-    return Line(point, Math.PI %(Math.PI - line.angle))
-}*/
+    val angle = Math.PI / 2 - line.angle
+    return Line(point, angle)
+}
 
 /**
  * Средняя
