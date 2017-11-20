@@ -199,12 +199,16 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     if (parts[0].contains(Regex("""[\D]"""))) throw IllegalArgumentException()
     var result = parts[0].toInt()
-    for (i in 1..parts.size - 1 step 2) {
-        when (parts[i]) {
-            "+" -> result += parts[i + 1].toInt()
-            "-" -> result -= parts[i + 1].toInt()
-            else -> throw IllegalArgumentException()
+    try {
+        for (i in 1..parts.size - 1 step 2) {
+            when (parts[i]) {
+                "+" -> result += parts[i + 1].toInt()
+                "-" -> result -= parts[i + 1].toInt()
+                else -> throw IllegalArgumentException()
+            }
         }
+    } catch (e: NumberFormatException) {
+        throw IllegalArgumentException()
     }
     return result
 }
