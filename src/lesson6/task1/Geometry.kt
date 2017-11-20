@@ -110,7 +110,7 @@ fun diameter(vararg points: Point): Segment {
     var seg = Segment(Point(0.0, 0.0), Point(0.0, 0.0))
     for (i in 0..points.size - 1) {
         for (j in i + 1..points.size - 1) {
-            if (points[i].distance(points[j]) > seg.end.distance(seg.end))
+            if (points[i].distance(points[j]) > seg.begin.distance(seg.end))
                 seg = Segment(points[i], points[j])
         }
     }
@@ -180,14 +180,20 @@ fun lineBySegment(s: Segment): Line {
  *
  * Построить прямую по двум точкам
  */
-fun lineByPoints(a: Point, b: Point): Line = TODO()
+fun lineByPoints(a: Point, b: Point): Line {
+    return lineBySegment(Segment(a, b))
+}
 
 /**
  * Сложная
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+fun bisectorByPoints(a: Point, b: Point): Line = TODO()/*{
+    val line  = lineByPoints(a, b)
+    val point = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
+    return Line(point, Math.PI %(Math.PI - line.angle))
+}*/
 
 /**
  * Средняя
