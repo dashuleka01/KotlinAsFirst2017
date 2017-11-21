@@ -248,19 +248,20 @@ fun firstDuplicateIndex(str: String): Int {
 fun mostExpensive(description: String): String {
     if (description == "") return ""
     val parts = description.split("; ", " ")
-    var price = mutableListOf<Double>()
-    var pr = 0.0
+    var price = 0.0
+    var ind = 0
     for (i in 1..parts.size - 1 step 2) {
         if (parts[i].contains(Regex("""[\d]"""))) {
-            if (parts[i].toDouble() > pr) pr = parts[i].toDouble()//price.add(parts[i].toDouble())
+            if (parts[i].toDouble() > price) {
+                price = parts[i].toDouble()
+                ind = i
+            }
         }
         else {
             return ""
         }
-        //val result = price.indexOf(price.max())
     }
-    val result = parts.indexOf(pr.toString()) - 1
-    return parts[result]//parts[result * 2]
+    return parts[ind - 1]
 }
 
 /**
