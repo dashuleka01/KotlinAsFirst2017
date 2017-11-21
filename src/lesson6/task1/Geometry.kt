@@ -172,7 +172,7 @@ class Line private constructor(val b: Double, val angle: Double) {
  */
 fun lineBySegment(s: Segment): Line {
     val ang = Math.acos(Math.abs(s.end.x - s.begin.x) / s.end.distance(s.begin))
-    return if (ang == Math.PI) Line(s.begin, 0.0)
+    return if (ang >= Math.PI / 2) Line(s.begin, Math.PI - ang)
     else Line(s.begin, ang)
 }
 
@@ -193,8 +193,9 @@ fun lineByPoints(a: Point, b: Point): Line {
 fun bisectorByPoints(a: Point, b: Point): Line {
     val line = lineByPoints(a, b)
     val point = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
-    val angle = line.angle
-    return Line(point, angle)
+    val ang = Math.PI / 2 + line.angle
+    return if (ang == Math.PI) Line(point, 0.0)
+    else Line(point, ang)
 }
 
 /**
