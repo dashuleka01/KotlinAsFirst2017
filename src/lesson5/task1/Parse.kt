@@ -252,12 +252,11 @@ fun mostExpensive(description: String): String {
     var ind = 0
     for (i in 1..parts.size - 1 step 2) {
         if (parts[i].contains(Regex("""[\d]"""))) {
-            if (parts[i].toDouble() > price) {
+            if (parts[i].toDouble() >= price) {
                 price = parts[i].toDouble()
                 ind = i
             }
-        }
-        else {
+        } else {
             return ""
         }
     }

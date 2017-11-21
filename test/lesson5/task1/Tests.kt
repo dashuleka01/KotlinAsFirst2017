@@ -109,6 +109,7 @@ class Tests {
         assertEquals("Курица", mostExpensive("Хлеб 39.9; Молоко 62.5; Курица 184.0; Конфеты 89.9"))
         assertEquals("Вино", mostExpensive("Вино 255.0"))
         assertEquals("Z%`%69b-73l!x", mostExpensive("u&w%%iKZj>0hvHso&XbI^UtL.IF*\\\"0%y|'@!Ik(P\$3_b0>/'Fep0%'PSJ~ovu\\\\kx)+3@mQ,@%ff1W5f-csHy@8c||}<B>0l\\\\%SLAL4WZAi5J?&1\\\\H69|S)%:Fw87}\\\\\$\\\"\\\"\\\"1dIIob7vyg~PPI}*?K8bWGoIS(,&3*<OED}Ac%LI]YY)Xa~\\\\@Ow%`4qm\\\"u%.${"$"}o)Us8{0M):A~R@.%0,g%\\\"${"$"}z?ZT+VsF-j 9787723.9; !?>-u 6195512.24; Z%`%69b-73l!x 14704291.64; \\\"`nLcl2%kKDnBeBFIi`<&p6psY~]n%%jLDME2Cm&_#as`Z4SE!WgIn|Am?v|#cdd'r~%v53mmq{\\\\w!C%T1e_dUVBaJUeH%,eZ 0"))
+        assertEquals("6(I|4r4Q=hTo76dn(Fj~ei6~3k,j%w<B&h\$usk8l%&2,`B`\\\"wq5m%)Cb3D7Z~v]k@bX/Zb,GT%}_3GTA3GYL,jbMAf%VJ%|c<8\\\\^^8)j6(%rgr4r}?6{zh|IMXQ%M%ok:~U=t<LCG%%wA~s<|HKSb}_~L84%LQRUG\$ZSl~XfIqj\\\"4{J<xl^,o%5r&}hy/?.LM&PuS2cd%9Wk862DQ%R%WJpUY6uWgis`Y)r|gCrR", mostExpensive("6(I|4r4Q=hTo76dn(Fj~ei6~3k,j%w<B&h\$usk8l%&2,`B`\\\"wq5m%)Cb3D7Z~v]k@bX/Zb,GT%}_3GTA3GYL,jbMAf%VJ%|c<8\\\\^^8)j6(%rgr4r}?6{zh|IMXQ%M%ok:~U=t<LCG%%wA~s<|HKSb}_~L84%LQRUG\$ZSl~XfIqj\\\"4{J<xl^,o%5r&}hy/?.LM&PuS2cd%9Wk862DQ%R%WJpUY6uWgis`Y)r|gCrR 0"))
     }
 
     @Test
