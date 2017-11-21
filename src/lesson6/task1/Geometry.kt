@@ -232,7 +232,7 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
     val bisectorCB = bisectorByPoints(c, b)
     val bisectorAC = bisectorByPoints(c, a)
     val center = bisectorCB.crossPoint(bisectorAC)
-    val radius = center.distance(c)
+    val radius = center.distance(b)
     return Circle(center, radius)
 }
 
