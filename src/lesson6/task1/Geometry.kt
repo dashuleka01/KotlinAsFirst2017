@@ -172,7 +172,7 @@ class Line private constructor(val b: Double, val angle: Double) {
  */
 fun lineBySegment(s: Segment): Line {
     val ang = Math.acos(Math.abs(s.end.x - s.begin.x) / s.end.distance(s.begin))
-    return if (ang >= Math.PI / 2) Line(s.begin, Math.PI - ang)
+    return if (ang == Math.PI) Line(s.begin, 0.0)
     else Line(s.begin, ang)
 }
 
