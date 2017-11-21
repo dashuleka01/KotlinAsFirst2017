@@ -172,7 +172,8 @@ class Line private constructor(val b: Double, val angle: Double) {
  */
 fun lineBySegment(s: Segment): Line {
     val ang = Math.atan((s.end.y - s.begin.y) / (s.end.x - s.begin.x))
-    return Line(s.begin, ang)
+    return if (ang < 0) Line(s.begin, Math.PI + ang)
+    else Line(s.begin, ang)
 }
 
 /**
@@ -193,7 +194,7 @@ fun bisectorByPoints(a: Point, b: Point): Line {
     val line = lineByPoints(a, b)
     val point = Point((a.x + b.x) / 2, (a.y + b.y) / 2)
     val ang = Math.PI / 2 + line.angle
-    return if (ang == Math.PI) Line(point, 0.0)
+    return if (ang > Math.PI) Line(point, ang - Math.PI)
     else Line(point, ang)
 }
 
@@ -230,8 +231,8 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> {
  */
 fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
     val bisectorCB = bisectorByPoints(c, b)
-    val bisectorAC = bisectorByPoints(c, a)
-    val center = bisectorCB.crossPoint(bisectorAC)
+    val bisectorBA = bisectorByPoints(b, a)
+    val center = bisectorCB.crossPoint(bisectorBA)
     val radius = center.distance(b)
     return Circle(center, radius)
 }
