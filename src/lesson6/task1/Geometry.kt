@@ -150,7 +150,7 @@ class Line private constructor(val b: Double, val angle: Double) {
      */
     fun crossPoint(other: Line): Point {
         val x = (other.b * Math.cos(angle) - b * Math.cos(other.angle)) / (Math.sin(angle) * Math.cos(other.angle) - Math.sin(other.angle) * Math.cos(angle))
-        val y = (x * Math.sin(other.angle) + other.b) / Math.cos(other.angle)
+        val y = (b * Math.sin(other.angle) - other.b * Math.sin(angle)) / (Math.cos(angle) * Math.sin(other.angle) - Math.cos(other.angle) * Math.sin(angle)) //(x * Math.sin(other.angle) + other.b) / Math.cos(other.angle)
         return Point(x, y)
     }
 
