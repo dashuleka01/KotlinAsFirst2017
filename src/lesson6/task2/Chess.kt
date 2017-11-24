@@ -155,7 +155,7 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> {
     if (x > 8 || y > 8 || x < 1 || y < 1) {
         val r = x
         x = start.column - (end.row - y)
-        y = start.row - (x - end.column)
+        y = start.row - (end.column - r)
     }
     return when (bishopMoveNumber(start, end)) {
         0 -> listOf(start)
