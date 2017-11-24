@@ -36,6 +36,7 @@ data class Square(val column: Int, val row: Int) {
  * Если нотация некорректна, бросить IllegalArgumentException
  */
 fun square(notation: String): Square {
+    if (notation.length != 2) throw IllegalArgumentException()
     try {
         return Square(notation[0] - 'a' + 1, notation[1].toString().toInt())
     } catch (e: IllegalArgumentException) {
@@ -67,7 +68,15 @@ fun square(notation: String): Square {
  * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
-fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+fun rookMoveNumber(start: Square, end: Square): Int {
+    return when {
+        start == end -> 0
+        start.column == end.column || start.row == end.row -> 1
+        start.column != end.column && start.row != end.row -> 2
+        else -> throw IllegalArgumentException()
+    }
+
+}
 
 /**
  * Средняя
