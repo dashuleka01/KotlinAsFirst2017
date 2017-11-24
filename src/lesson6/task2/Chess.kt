@@ -36,13 +36,12 @@ data class Square(val column: Int, val row: Int) {
  * Если нотация некорректна, бросить IllegalArgumentException
  */
 fun square(notation: String): Square {
-    if (notation.length != 2) throw IllegalArgumentException()
+    if (notation.length != 2 || !notation[0].toString().contains(Regex("""[a-h]"""))) throw IllegalArgumentException()
     try {
         return Square(notation[0] - 'a' + 1, notation[1].toString().toInt())
     } catch (e: IllegalArgumentException) {
         throw IllegalArgumentException()
     }
-
 }
 
 /**
@@ -70,13 +69,11 @@ fun square(notation: String): Square {
  */
 fun rookMoveNumber(start: Square, end: Square): Int {
     return when {
+        !start.inside() || !end.inside() -> throw IllegalArgumentException()
         start == end -> 0
         start.column == end.column || start.row == end.row -> 1
-        //start.column != end.column && start.row != end.row ->
-        !start.inside() || !end.inside() -> throw IllegalArgumentException()
         else -> 2
     }
-
 }
 
 /**
