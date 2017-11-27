@@ -3,6 +3,7 @@ package lesson1.task1
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import java.lang.IllegalArgumentException
 
 class Tests {
     @Test
@@ -96,3 +97,4 @@ class Tests {
         assertEquals(201, numberRevert(102))
     }
 }
+
