@@ -274,7 +274,28 @@ fun mostExpensive(description: String): String {
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    var numbers = mutableListOf<Int>()
+    var result = 0
+    for (i in roman) {
+        when (i.toString()) {
+            "I" -> numbers.add(1)
+            "V" -> numbers.add(5)
+            "X" -> numbers.add(10)
+            "L" -> numbers.add(50)
+            "C" -> numbers.add(100)
+            "D" -> numbers.add(500)
+            "M" -> numbers.add(1000)
+            else -> return -1
+        }
+    }
+    if (numbers.size == 1) return numbers[0]
+    for (i in 0..numbers.size - 2) {
+        if (numbers[i] < numbers[i + 1]) result -= numbers[i]
+        else result += numbers[i]
+    }
+    return result + numbers[numbers.lastIndex]
+}
 
 /**
  * Очень сложная
