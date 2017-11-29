@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER", "unused")
+
 package lesson7.task1
 
 /**
@@ -21,6 +22,7 @@ interface Matrix<E> {
      * Методы могут бросить исключение, если ячейка не существует или пуста
      */
     operator fun get(row: Int, column: Int): E
+
     operator fun get(cell: Cell): E
 
     /**
@@ -28,6 +30,7 @@ interface Matrix<E> {
      * Методы могут бросить исключение, если ячейка не существует
      */
     operator fun set(row: Int, column: Int, value: E)
+
     operator fun set(cell: Cell, value: E)
 }
 
@@ -47,20 +50,21 @@ fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> {
  *
  * Реализация интерфейса "матрица"
  */
-class MatrixImpl<E> (override val height: Int, override val width: Int, e: E): Matrix<E> {
+class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : Matrix<E> {
     private val list = mutableListOf<E>()
     init {
-        for(i in 0..height * width){
+        if (height <= 0 || width <= 0)
+            throw IllegalArgumentException()
+        for (i in 0..height * width) {
             list.add(e)
         }
-
     }
 
-    override fun get(row: Int, column: Int): E  {
+    override fun get(row: Int, column: Int): E {
         return list[row * width + column]
     }
 
-    override fun get(cell: Cell): E  {
+    override fun get(cell: Cell): E {
         return list[cell.row * width + cell.column]
     }
 
@@ -76,10 +80,10 @@ class MatrixImpl<E> (override val height: Int, override val width: Int, e: E): M
         other is MatrixImpl<*> && equalsMatrix(other)
     }
 
-    fun equalsMatrix(other: MatrixImpl<E>): Boolean{
-        if(height != other.height || width != other.width) return false
+    fun equalsMatrix(other: MatrixImpl<E>): Boolean {
+        if (height != other.height || width != other.width) return false
         for (i in 0..height * width)
-            if(list[i] != other.list[i]) return false
+            if (list[i] != other.list[i]) return false
         return true
     }
 
