@@ -55,7 +55,7 @@ class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : M
     init {
         if (height <= 0 || width <= 0)
             throw IllegalArgumentException()
-        for (i in 0..height * width) {
+        for (i in 0..height * width - 1) {
             list.add(e)
         }
     }

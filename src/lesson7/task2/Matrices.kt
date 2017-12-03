@@ -1,7 +1,9 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson7.task2
 
 import lesson7.task1.Matrix
+import lesson7.task1.MatrixImpl
 import lesson7.task1.createMatrix
 
 // Все задачи в этом файле требуют наличия реализации интерфейса "Матрица" в Matrix.kt
@@ -103,7 +105,20 @@ fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
  * 4 5 6      8 5 2
  * 7 8 9      9 6 3
  */
-fun <E> rotate(matrix: Matrix<E>): Matrix<E> = TODO()
+fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
+    var rotatedMatrix = matrix
+    var tmp = rotatedMatrix[0,0]
+    for (i in 0..matrix.height / 2 - 1) {
+        for (j in i..matrix.height - 1 - i - 1) {
+            tmp = rotatedMatrix[i, j]
+            rotatedMatrix[i, j] = rotatedMatrix[matrix.width - j - 1, i]
+            rotatedMatrix[matrix.height - j - 1, i] = rotatedMatrix[matrix.height - i - 1, matrix.height - j - 1]
+            rotatedMatrix[matrix.height - i - 1, matrix.height - j - 1] = rotatedMatrix[j, matrix.height - i - 1]
+            rotatedMatrix[j, matrix.height - i - 1] = tmp
+        }
+    }
+    return rotatedMatrix
+}
 
 /**
  * Сложная
