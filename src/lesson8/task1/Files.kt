@@ -58,15 +58,17 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     var j = 0
     for (i in substrings) {
         for (line in File(inputName).readLines()) {
-              if (line.toLowerCase().contains(i.toLowerCase())){
-                if(i.length == 1){
-                    for(letter in line){
-                        if (letter.toString().toLowerCase() == i.toLowerCase())
-                            j++
-                    }
+            if (i.length == 1) {
+                for (letter in line) {
+                    if (letter.toString().toLowerCase() == i.toLowerCase())
+                        j++
                 }
-                else j++
-              }
+            } else {
+                for (words in line.split(" ")) {
+                    if (words.toLowerCase().contains(i.toLowerCase()))
+                        j++
+                }
+            }
         }
         result[i] = j
         j = 0
