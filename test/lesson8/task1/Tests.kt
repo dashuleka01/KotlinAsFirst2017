@@ -70,7 +70,7 @@ Basic, Ruby, Swift.
         sibilants("input/sibilants_in1.txt", "temp.txt")
         assertFileContent("temp.txt",
 """/**
- * Проста
+ * Простая
  *
  * В русском языке, как правило, после букв Ж, Ч, Ш, Щ пишется И, А, У, а не Ы, Я, Ю.
  * Во входном файле с именем inputName содержится некоторый текст.
