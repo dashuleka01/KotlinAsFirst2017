@@ -82,29 +82,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    var outputStream = File(outputName).bufferedWriter()
-    for (line in File(inputName).readLines()) {
-        for(word in line.split(" ")){
-            if (word.toLowerCase() == "жюри" || word.toLowerCase() == "брошюра" || word.toLowerCase() == "парашют" ) {
-                outputStream.write(word)
-            }
-            if(word.toLowerCase().contains(Regex("""жы|жю|жя|чы|чю|чя|шы|шю|шя|щы|щю|щя"""))){
-                when{
-                    word.contains("Ы") -> outputStream.write(Regex("Ы").replace(word, "И"))
-                    word.contains("ы") -> outputStream.write(Regex("ы").replace(word, "и"))
-                    word.contains("Я") -> outputStream.write(Regex("Я").replace(word, "А"))
-                    word.contains("я") -> outputStream.write(Regex("я").replace(word, "а"))
-                    word.contains("Ю") -> outputStream.write(Regex("Ю").replace(word, "У"))
-                    word.contains("ю") -> outputStream.write(Regex("ю").replace(word, "у"))
-                }
-            }
-            outputStream.write(word + " ")
-        }
-        outputStream.newLine()
-    }
-    outputStream.close()
+    TODO()
 }
-
 /**
  * Средняя
  *
