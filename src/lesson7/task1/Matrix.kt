@@ -76,13 +76,12 @@ class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : M
         list[cell.row * width + cell.column] = value
     }
 
-    fun equals(other: MatrixImpl<E>) {
-        other is MatrixImpl<*> && equalsMatrix(other)
-    }
+    override fun equals(other: Any?) = other is MatrixImpl<*> && equalsMatrix(other)
 
-    fun equalsMatrix(other: MatrixImpl<E>): Boolean {
+
+    fun equalsMatrix(other: MatrixImpl<*>): Boolean {
         if (height != other.height || width != other.width) return false
-        for (i in 0..height * width)
+        for (i in 0 until height * width)
             if (list[i] != other.list[i]) return false
         return true
     }
