@@ -292,7 +292,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
 fun decimalFromString(str: String, base: Int): Int {
     var list = mutableListOf<Int>()
     for (i in str) {
-        if (i.toString().contains(Regex("""[a-z]"""))) list.add(i - 'W')
+        if (i.toString().contains(Regex("""[a-z]"""))) list.add(i - 'a' + 10)
         else list.add(i - '0')
     }
     return decimal(list, base)
