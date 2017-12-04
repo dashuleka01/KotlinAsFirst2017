@@ -69,7 +69,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     var matrix = MatrixImpl<Int>(height, width, 0)
     var i = 1
     var flag = 1
-    while(i <= width * height){
+    while (i <= width * height) {
         if (flag == 1) {
             for (j in a until spriralWidth) {
                 matrix[a, j] = i
@@ -79,8 +79,8 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
             spriralWidth--
             continue
         }
-        if (flag == 2){
-            for (j in b until spriralHeight){
+        if (flag == 2) {
+            for (j in b until spriralHeight) {
                 matrix[j, spriralWidth] = i
                 i++
             }
@@ -88,8 +88,8 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
             b++
             continue
         }
-        if (flag == 3){
-            for (j in spriralWidth - 1 downTo  a){
+        if (flag == 3) {
+            for (j in spriralWidth - 1 downTo a) {
                 matrix[spriralHeight - 1, j] = i
                 i++
             }
@@ -97,8 +97,8 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
             spriralHeight--
             continue
         }
-        if (flag == 4){
-            for (j in spriralHeight downTo b){
+        if (flag == 4) {
+            for (j in spriralHeight downTo b) {
                 matrix[j - 1, a] = i
                 i++
             }
@@ -109,6 +109,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     }
     return matrix
 }
+
 /**
  * Сложная
  *
@@ -153,7 +154,7 @@ fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
  */
 fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
     var rotatedMatrix = matrix
-    var tmp = rotatedMatrix[0,0]
+    var tmp = rotatedMatrix[0, 0]
     for (i in 0..matrix.height / 2 - 1) {
         for (j in i..matrix.height - 1 - i - 1) {
             tmp = rotatedMatrix[i, j]
