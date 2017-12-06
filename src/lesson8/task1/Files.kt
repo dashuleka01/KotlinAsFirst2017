@@ -83,37 +83,29 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  */
 fun sibilants(inputName: String, outputName: String) {
     val outputStream = File(outputName).bufferedWriter()
-    var numOfWord = 0
     for (line in File(inputName).readLines()) {
-        for (words in line.split(" ")) {
-            when {
-                words.toLowerCase() == "жюри" || words.toLowerCase() == "брошюра" || words.toLowerCase() == "парашют" -> outputStream.write(words)
-
-                words.contains(Regex("жю|щю|чю|шю")) -> outputStream.write(Regex("ю").replace(words, "у"))
-                words.contains(Regex("жя|щя|чя|шя")) -> outputStream.write(Regex("я").replace(words, "а"))
-                words.contains(Regex("жы|щы|чы|шы")) -> outputStream.write(Regex("ы").replace(words, "и"))
-
-                words.contains(Regex("Жю|Щю|Чю|Шю")) -> outputStream.write(Regex("ю").replace(words, "у"))
-                words.contains(Regex("Жя|Щя|Чя|Шя")) -> outputStream.write(Regex("я").replace(words, "а"))
-                words.contains(Regex("Жы|Щы|Чы|Шы")) -> outputStream.write(Regex("ы").replace(words, "и"))
-
-                words.contains(Regex("ЖЮ|ЩЮ|ЧЮ|ШЮ")) -> outputStream.write(Regex("Ю").replace(words, "У"))
-                words.contains(Regex("ЖЯ|ЩЯ|ЧЯ|ШЯ")) -> outputStream.write(Regex("Я").replace(words, "А"))
-                words.contains(Regex("ЖЫ|ЩЫ|ЧЫ|ШЫ")) -> outputStream.write(Regex("Ы").replace(words, "И"))
-
-                words.contains(Regex("жЮ|щЮ|чЮ|шЮ")) -> outputStream.write(Regex("Ю").replace(words, "У"))
-                words.contains(Regex("жЯ|щЯ|чЯ|шЯ")) -> outputStream.write(Regex("Я").replace(words, "А"))
-                words.contains(Regex("жЫ|щЫ|чЫ|шЫ")) -> outputStream.write(Regex("Ы").replace(words, "И"))
-                else -> outputStream.write(words)
+        outputStream.write(line[0].toString())
+        for (letter in 0 until line.length) {
+            if (letter + 1 == line.length) break
+            if (line[letter].toString().toLowerCase().matches(Regex("ж|ч|ш|щ")) &&
+                    line[letter + 1].toString().toLowerCase().matches(Regex("я|ю|ы"))) {
+                when (line[letter + 1].toString()) {
+                    "ю" -> outputStream.write("у")
+                    "я" -> outputStream.write("а")
+                    "ы" -> outputStream.write("и")
+                    "Ю" -> outputStream.write("У")
+                    "Я" -> outputStream.write("А")
+                    "Ы" -> outputStream.write("И")
+                }
+            } else {
+                outputStream.write(line[letter + 1].toString())
             }
-            numOfWord++
-            if (numOfWord != line.split(" ").size) outputStream.write(" ")
         }
-        numOfWord = 0
         outputStream.newLine()
     }
     outputStream.close()
 }
+
 
 /**
  * Средняя
