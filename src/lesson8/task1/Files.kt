@@ -57,10 +57,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     var result = mutableMapOf<String, Int>()
     var j = 0
     for (i in substrings) {
-        for (line in File(inputName).readLines()) {
-            for (a in Regex(i.toLowerCase()).findAll(line.toLowerCase(), 0))
-                j++
-        }
+        for (line in File(inputName).readLines())
+            j += Regex(i.toLowerCase()).findAll(line.toLowerCase(), 0).count()
         result[i] = j
         j = 0
     }
@@ -85,17 +83,25 @@ fun sibilants(inputName: String, outputName: String) {
     val outputStream = File(outputName).bufferedWriter()
     for (line in File(inputName).readLines()) {
         outputStream.write(line[0].toString())
-        for (letter in 0 until line.length) {
-            if (letter + 1 == line.length) break
-            if (line[letter].toString().toLowerCase().matches(Regex("ж|ч|ш|щ")) &&
-                    line[letter + 1].toString().toLowerCase().matches(Regex("я|ю|ы"))) {
-                when (line[letter + 1].toString()) {
-                    "ю" -> outputStream.write("у")
-                    "я" -> outputStream.write("а")
-                    "ы" -> outputStream.write("и")
-                    "Ю" -> outputStream.write("У")
-                    "Я" -> outputStream.write("А")
-                    "Ы" -> outputStream.write("И")
+
+        for (letter in 0 until line.length - 1) {
+            if (line[letter].toString().toLowerCase().matches(Regex("ж|ч|ш|щ"))) {
+                if (line[letter + 1] == 'ю' && line[letter + 2] == 'р' && line[letter + 3] == 'и' ||
+                        letter in line.length - 9..line.length - 3 && line[letter - 4] == 'п' && line[letter - 3] == 'а'
+                                && line[letter - 2] == 'р' && line[letter - 1] == 'а' && line[letter + 1] == 'ю' && line[letter + 2] == 'т' ||
+                        letter in line.length - 9..line.length - 4 && line[letter - 1] == 'б' && line[letter - 1] == 'р' && line[letter - 1] == 'о'
+                                && line[letter + 1] == 'ю' && line[letter + 2] == 'р' && line[letter + 3] == 'а')
+                    outputStream.write(line[letter + 1].toString())
+                else {
+                    when (line[letter + 1]) {
+                        'ю' -> outputStream.write("у")
+                        'я' -> outputStream.write("а")
+                        'ы' -> outputStream.write("и")
+                        'Ю' -> outputStream.write("У")
+                        'Я' -> outputStream.write("А")
+                        'Ы' -> outputStream.write("И")
+                        else -> outputStream.write(line[letter + 1].toString())
+                    }
                 }
             } else {
                 outputStream.write(line[letter + 1].toString())
@@ -156,7 +162,40 @@ fun centerFile(inputName: String, outputName: String) {
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    val outputStream = File(outputName).bufferedWriter()
+    var thisLine = ""
+    var maxLine = 0
+    var countOfWords = 0
+    var probel = 0
+    for (line in File(inputName).readLines()) {
+        if (maxLine < line.length) maxLine = line.length
+    }
+    for (line in File(inputName).readLines()) {
+
+        thisLine = line
+        thisLine = Regex("""^((\s)+)|(\s+)$""").replace(thisLine, "")
+        for (words in thisLine.split(" ")) {
+            countOfWords = thisLine.split(" ").size
+            probel = (maxLine - thisLine.length) / (countOfWords - 1)
+            outputStream.write(words)
+            if (countOfWords == 1 || thisLine.split(" ").indexOf(words) == countOfWords - 1) break
+            if (line.length == maxLine)
+                outputStream.write(" ")
+            else {
+                /*if ((maxLine - thisLine.length) % (countOfWords - 1) == 0) {
+                    for (i in 0..(maxLine - thisLine.length) / (countOfWords - 1))
+                        outputStream.write(" ")
+                }
+                else{
+
+                }*/
+            }
+        }
+
+
+        outputStream.newLine()
+    }
+    outputStream.close()
 }
 
 /**
@@ -277,7 +316,42 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()
+    val outputStream = File(outputName).bufferedWriter()
+    var flagi = 1
+    var flagb = 1
+    var flags = 1
+
+    outputStream.write("<html>\n" + "<body>\n")
+    for (line in File(inputName).readLines()) {
+        outputStream.write("<p>\n")
+        for (i in 0..line.length - 1) {
+            if (line[i].toString() == "*") {
+
+                if (line[i + 1].toString() == "*") {
+
+                    if (line[i + 2].toString() == "*")
+                        outputStream.write("<b><i>")
+                    else
+                        outputStream.write("<b>")
+
+                } else
+                    outputStream.write("<i>")
+
+            } else {
+                if (line[i].toString() == "~") {
+                    if (line[i + 1].toString() == "~") {
+                        outputStream.write("<s>")
+                    }
+                } else
+                    outputStream.write(line[i].toString())
+            }
+
+
+        }
+        outputStream.write("</p>\n")
+    }
+    outputStream.write("</body>\n" + "</html>")
+    outputStream.close()
 }
 
 /**

@@ -61,51 +61,41 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
  * 10 11 12  5
  *  9  8  7  6
  */
+
+
 fun generateSpiral(height: Int, width: Int): Matrix<Int> {
-    var spriralHeight = height
-    var spriralWidth = width
+    var spriralHeight = height - 1
+    var spriralWidth = width - 1
     var a = 0
     var b = 1
     var matrix = MatrixImpl<Int>(height, width, 0)
     var i = 1
-    var flag = 1
     while (i <= width * height) {
-        if (flag == 1) {
-            for (j in a until spriralWidth) {
-                matrix[a, j] = i
-                i++
-            }
-            flag++
-            spriralWidth--
-            continue
+
+        for (j in a..spriralWidth) {
+            matrix[a, j] = i
+            i++
         }
-        if (flag == 2) {
-            for (j in b until spriralHeight) {
-                matrix[j, spriralWidth] = i
-                i++
-            }
-            flag++
-            b++
-            continue
+
+        for (j in b..spriralHeight) {
+            matrix[j, spriralWidth] = i
+            i++
         }
-        if (flag == 3) {
-            for (j in spriralWidth - 1 downTo a) {
-                matrix[spriralHeight - 1, j] = i
-                i++
-            }
-            flag++
-            spriralHeight--
-            continue
+
+        for (j in spriralWidth - b downTo a) {
+            matrix[spriralHeight, j] = i
+            i++
         }
-        if (flag == 4) {
-            for (j in spriralHeight downTo b) {
-                matrix[j - 1, a] = i
-                i++
-            }
-            a++
-            flag = 1
-            continue
+
+        for (j in spriralHeight -  1 downTo b) {
+            matrix[j, a] = i
+            i++
         }
+
+        spriralWidth--
+        spriralHeight--
+        b++
+        a++
     }
     return matrix
 }
@@ -153,12 +143,12 @@ fun generateSnake(height: Int, width: Int): Matrix<Int> = TODO()
  * 7 8 9      9 6 3
  */
 fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
+    if (matrix.height != matrix.width) throw IllegalArgumentException()
     var rotatedMatrix = matrix
-    var tmp = rotatedMatrix[0, 0]
     for (i in 0..matrix.height / 2 - 1) {
         for (j in i..matrix.height - 1 - i - 1) {
-            tmp = rotatedMatrix[i, j]
-            rotatedMatrix[i, j] = rotatedMatrix[matrix.width - j - 1, i]
+            var tmp = rotatedMatrix[i, j]
+            rotatedMatrix[i, j] = rotatedMatrix[matrix.height - j - 1, i]
             rotatedMatrix[matrix.height - j - 1, i] = rotatedMatrix[matrix.height - i - 1, matrix.height - j - 1]
             rotatedMatrix[matrix.height - i - 1, matrix.height - j - 1] = rotatedMatrix[j, matrix.height - i - 1]
             rotatedMatrix[j, matrix.height - i - 1] = tmp
