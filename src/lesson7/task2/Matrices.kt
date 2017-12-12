@@ -70,12 +70,13 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     var b = 1
     var matrix = MatrixImpl<Int>(height, width, 1)
     var i = 1
-    while (i < width * height) {
+    while (i <= width * height) {
 
         for (j in a..spriralWidth - 1) {
             matrix[a, j] = i
             i++
         }
+        if (i > width * height) break
 
         for (j in b..spriralHeight - 1) {
             matrix[j, spriralWidth - 1] = i
@@ -87,7 +88,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
             matrix[spriralHeight - 1, j] = i
             i++
         }
-        
+
         if (i > width * height) break
 
         for (j in spriralHeight - 2 downTo b) {
