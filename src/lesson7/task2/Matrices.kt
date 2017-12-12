@@ -64,38 +64,39 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
 
 
 fun generateSpiral(height: Int, width: Int): Matrix<Int> {
-    var spriralHeight = height - 1
-    var spriralWidth = width - 1
+    var spriralHeight = height
+    var spriralWidth = width
     var a = 0
     var b = 1
-    var matrix = MatrixImpl<Int>(height, width, 0)
+    var matrix = MatrixImpl<Int>(height, width, 1)
     var i = 1
-    while (i <= width * height) {
+    while (i < width * height) {
 
-        for (j in a..spriralWidth) {
+        for (j in a..spriralWidth - 1) {
             matrix[a, j] = i
             i++
         }
 
-        for (j in b..spriralHeight) {
-            matrix[j, spriralWidth] = i
+        for (j in b..spriralHeight - 1) {
+            matrix[j, spriralWidth - 1] = i
+            i++
+        }
+        if (i >= width * height) break
+
+        for (j in spriralWidth - 2 downTo a) {
+            matrix[spriralHeight - 1, j] = i
             i++
         }
 
-        for (j in spriralWidth - b downTo a) {
-            matrix[spriralHeight, j] = i
-            i++
-        }
-
-        for (j in spriralHeight -  1 downTo b) {
+        for (j in spriralHeight - 2 downTo b) {
             matrix[j, a] = i
             i++
         }
 
-        spriralWidth--
-        spriralHeight--
-        b++
         a++
+        b++
+        spriralHeight--
+        spriralWidth--
     }
     return matrix
 }
