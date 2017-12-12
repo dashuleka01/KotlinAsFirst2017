@@ -66,34 +66,38 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
 fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     var spriralHeight = height
     var spriralWidth = width
-    var a = 0
+    var a = 1
     var b = 1
     var matrix = MatrixImpl<Int>(height, width, 1)
     var i = 1
-    while (i <= width * height) {
+    while (i < width * height) {
 
         for (j in a..spriralWidth - 1) {
-            matrix[a, j] = i
             i++
+            matrix[a, j] = i
+
         }
         if (i > width * height) break
 
         for (j in b..spriralHeight - 1) {
-            matrix[j, spriralWidth - 1] = i
             i++
+            matrix[j, spriralWidth - 1] = i
+
         }
         if (i > width * height) break
 
         for (j in spriralWidth - 2 downTo a) {
-            matrix[spriralHeight - 1, j] = i
             i++
+            matrix[spriralHeight - 1, j] = i
+
         }
 
         if (i > width * height) break
 
         for (j in spriralHeight - 2 downTo b) {
-            matrix[j, a] = i
             i++
+            matrix[j, a] = i
+
         }
 
         a++
@@ -177,26 +181,22 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
 fun isLatinSquare(matrix: Matrix<Int>): Boolean {
     if (matrix.height != matrix.width) return false
     var n = matrix.height
-    var list = mutableListOf<Int>()
-    for (i in 1..n)
-        list.add(i)
-    for (j in 0..n - 1) {
-        for (i in 0..n - 1) {
-            for (elements in 0..list.size - 1)
-                if (matrix[j, i] == list[elements]) list[elements] = 0
-        }
-        if (list.max() != 0) return false
-        for (i in 1..n)
-            list[i - 1] = i
+    var str = ""
+    var a = ""
+    var b = ""
+    for (j in 1..n) {
+        str += j.toString()
     }
-    for (j in 0..n - 1) {
-        for (i in 0..n - 1) {
-            for (elements in 0..list.size - 1)
-                if (matrix[i, j] == list[elements]) list[elements] = 0
+    for (j in 0 until n) {
+        for (i in 0 until n) {
+            a += matrix[i, j].toString()
+            b += matrix[j, i].toString()
         }
-        if (list.max() != 0) return false
-        for (i in 1..n)
-            list[i - 1] = i
+        for (j in str) {
+            if (Regex(j.toString()).findAll(a).count() != 1 || Regex(j.toString()).findAll(b).count() != 1) return false
+        }
+        a = ""
+        b = ""
     }
     return true
 }
