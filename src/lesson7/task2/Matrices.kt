@@ -87,6 +87,8 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
             matrix[spriralHeight - 1, j] = i
             i++
         }
+        
+        if (i > width * height) break
 
         for (j in spriralHeight - 2 downTo b) {
             matrix[j, a] = i
