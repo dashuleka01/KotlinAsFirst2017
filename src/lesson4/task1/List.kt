@@ -390,7 +390,7 @@ fun russian(n: Int): String {
     if (result != "" && numOne % 100 > 0) result += " "
 
     if (numOne % 100 in 10..19) {
-        if (result != "") result += " "
+        
         when (numOne % 100) {
             10 -> result += "десять"
             11 -> result += "одиннадцать"
