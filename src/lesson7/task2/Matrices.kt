@@ -70,7 +70,7 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     var b = 1
     var matrix = MatrixImpl<Int>(height, width, 1)
     var i = 1
-    while (i < width * height) {
+    while (i <= width * height) {
         for (j in a..spriralWidth - 1) {
             matrix[a, j] = i
             i++
