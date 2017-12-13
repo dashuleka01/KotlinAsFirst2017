@@ -189,11 +189,11 @@ fun isLatinSquare(matrix: Matrix<Int>): Boolean {
     }
     for (j in 0 until n) {
         for (i in 0 until n) {
-            a += matrix[i, j].toString()
-            b += matrix[j, i].toString()
+            a += matrix[i, j].toString() + ", "
+            b += matrix[j, i].toString() + ", "
         }
         for (j in str) {
-            if (Regex(j.toString()).findAll(a).count() != 1 || Regex(j.toString()).findAll(b).count() != 1) return false
+            if (Regex(j.toString() + ",").findAll(a).count() != 1 || Regex(j.toString()).findAll(b).count() != 1) return false
         }
         a = ""
         b = ""
