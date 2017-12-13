@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson4.task1
 
 import lesson1.task1.discriminant
@@ -121,7 +122,7 @@ fun abs(v: List<Double>): Double {
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double{
+fun mean(list: List<Double>): Double {
     var result = 0.0
     if (list.size == 0) return 0.0
     for (i in list)
@@ -168,7 +169,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Значение пустого многочлена равно 0.0 при любом x.
  */
 fun polynom(p: List<Double>, x: Double): Double {
-    var result =  0.0
+    var result = 0.0
     for (i in 0..p.size - 1)
         result += p[i] * pow(x, i.toDouble())
     return result
@@ -185,7 +186,7 @@ fun polynom(p: List<Double>, x: Double): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
-    if(list.size != 0){
+    if (list.size != 0) {
         var sum = list[0]
         var current = 0.0
         for (i in 1..list.size - 1) {
@@ -223,7 +224,7 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String  = factorize(n).joinToString (separator = "*")
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 
 /**
@@ -235,11 +236,10 @@ fun factorizeToString(n: Int): String  = factorize(n).joinToString (separator = 
  */
 fun convert(n: Int, base: Int): List<Int> {
     var list = mutableListOf<Int>()
-    var  num = n
+    var num = n
     if (n == 0) {
         list.add(0)
-    }
-    else {
+    } else {
         while (num > 0) {
             list.add(num % base)
             num /= base
@@ -315,4 +315,117 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var numOne = n % 1000
+    var numTwo = n / 1000
+    var result = ""
+
+    if (numTwo > 0) {
+        when (numTwo / 100) {
+            1 -> result += "сто "
+            2 -> result += "двести "
+            3 -> result += "триста "
+            4 -> result += "четыреста "
+            5 -> result += "пятьсот "
+            6 -> result += "шестьсот "
+            7 -> result += "семьсот "
+            8 -> result += "восемьсот "
+            9 -> result += "девятьсот "
+            else -> result += ""
+        }
+
+        if (numTwo % 100 in 10..19) {
+            when (numTwo % 100) {
+                10 -> result += "десять тысяч"
+                11 -> result += "одиннадцать тысяч"
+                12 -> result += "двенадцать тысяч"
+                13 -> result += "тринадцать тысяч"
+                14 -> result += "четырнадцать тысяч"
+                15 -> result += "пятнадцать тысяч"
+                16 -> result += "шестнадцать тысяч"
+                17 -> result += "семнадцать тысяч"
+                18 -> result += "восемнадцать тысяч"
+                else -> result += "девятнадцать тысяч"
+            }
+        } else {
+            when (numTwo % 100 / 10) {
+                2 -> result += "двадцать "
+                3 -> result += "тридцать "
+                4 -> result += "сорок "
+                5 -> result += "пятьдесят "
+                6 -> result += "шестьдесят "
+                7 -> result += "семьдесят "
+                8 -> result += "восемьдесят "
+                9 -> result += "девяносто "
+                else -> result += ""
+            }
+
+            when (numTwo % 10) {
+                1 -> result += "одна тысяча"
+                2 -> result += "две тысячи"
+                3 -> result += "три тысячи"
+                4 -> result += "четыре тысячи"
+                5 -> result += "пять тысяч"
+                6 -> result += "шесть тысяч"
+                7 -> result += "семь тысяч"
+                8 -> result += "восемь тысяч"
+                9 -> result += "девять тысяч"
+                else -> result += "тысяч"
+            }
+        }
+    }
+    if (numOne > 0 && numTwo > 0) result += " "
+    when (numOne / 100) {
+        1 -> result += "сто "
+        2 -> result += "двести "
+        3 -> result += "триста "
+        4 -> result += "четыреста "
+        5 -> result += "пятьсот "
+        6 -> result += "шестьсот "
+        7 -> result += "семьсот "
+        8 -> result += "восемьсот "
+        9 -> result += "девятьсот "
+        else -> result += ""
+    }
+
+    if (numOne % 100 in 10..19) {
+        when (numOne % 100) {
+            10 -> result += "десять"
+            11 -> result += "одиннадцать"
+            12 -> result += "двенадцать"
+            13 -> result += "тринадцать"
+            14 -> result += "четырнадцать"
+            15 -> result += "пятнадцать"
+            16 -> result += "шестнадцать"
+            17 -> result += "семнадцать"
+            18 -> result += "восемнадцать"
+            else -> result += "девятнадцать"
+        }
+    } else {
+        when (numOne % 100 / 10) {
+            2 -> result += "двадцать "
+            3 -> result += "тридцать "
+            4 -> result += "сорок "
+            5 -> result += "пятьдесят "
+            6 -> result += "шестьдесят "
+            7 -> result += "семьдесят "
+            8 -> result += "восемьдесят "
+            9 -> result += "девяносто "
+            else -> result += ""
+        }
+
+        when (numOne % 10) {
+            1 -> result += "один"
+            2 -> result += "два"
+            3 -> result += "три"
+            4 -> result += "четыре"
+            5 -> result += "пять"
+            6 -> result += "шесть"
+            7 -> result += "семь"
+            8 -> result += "восемь"
+            9 -> result += "девять"
+            else -> result += ""
+        }
+    }
+    return result
+}
