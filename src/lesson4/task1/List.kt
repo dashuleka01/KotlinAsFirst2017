@@ -374,21 +374,23 @@ fun russian(n: Int): String {
             }
         }
     }
-    if (numOne > 0 && numTwo > 0) result += " "
+    if (numOne / 100 > 0 && numTwo > 0) result += " "
     when (numOne / 100) {
-        1 -> result += "сто "
-        2 -> result += "двести "
-        3 -> result += "триста "
-        4 -> result += "четыреста "
-        5 -> result += "пятьсот "
-        6 -> result += "шестьсот "
-        7 -> result += "семьсот "
-        8 -> result += "восемьсот "
-        9 -> result += "девятьсот "
+        1 -> result += "сто"
+        2 -> result += "двести"
+        3 -> result += "триста"
+        4 -> result += "четыреста"
+        5 -> result += "пятьсот"
+        6 -> result += "шестьсот"
+        7 -> result += "семьсот"
+        8 -> result += "восемьсот"
+        9 -> result += "девятьсот"
         else -> result += ""
     }
+    if (result != "" && numOne % 100 > 0) result += " "
 
     if (numOne % 100 in 10..19) {
+        if (result != "") result += " "
         when (numOne % 100) {
             10 -> result += "десять"
             11 -> result += "одиннадцать"
@@ -403,16 +405,17 @@ fun russian(n: Int): String {
         }
     } else {
         when (numOne % 100 / 10) {
-            2 -> result += "двадцать "
-            3 -> result += "тридцать "
-            4 -> result += "сорок "
-            5 -> result += "пятьдесят "
-            6 -> result += "шестьдесят "
-            7 -> result += "семьдесят "
-            8 -> result += "восемьдесят "
-            9 -> result += "девяносто "
+            2 -> result += "двадцать"
+            3 -> result += "тридцать"
+            4 -> result += "сорок"
+            5 -> result += "пятьдесят"
+            6 -> result += "шестьдесят"
+            7 -> result += "семьдесят"
+            8 -> result += "восемьдесят"
+            9 -> result += "девяносто"
             else -> result += ""
         }
+        if (numOne % 100 / 10 > 0&& numOne % 10 > 0 && result != "") result += " "
 
         when (numOne % 10) {
             1 -> result += "один"
