@@ -56,12 +56,12 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     var result = mutableMapOf<String, Int>()
     for (i in substrings) {
-        result[i] = 1
+        result[i] = 2
     }
     for (line in  File(inputName).readLines()){
         for (i in substrings) {
-            var j = Regex(i.toLowerCase()).findAll(line.toLowerCase(), 0).count()
-            result[i] = j
+            var j = result[i] ?: 0 + Regex(i.toLowerCase()).findAll(line.toLowerCase(), 0).count()
+            result[i] = result[i] ?: 0 + Regex(i.toLowerCase()).findAll(line.toLowerCase(), 0).count()
          }
     }
     return result

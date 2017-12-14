@@ -270,7 +270,7 @@ fun minContainingCircle(vararg points: Point): Circle {
     for (i in outSidePoints) {
         resultCircle = circleByThreePoints(seg.begin, seg.end, i)
         var count = 0
-        for (j in outSidePoints) {
+        for (j in points) {
             if (resultCircle.contains(j)) count++
             else break
         }
