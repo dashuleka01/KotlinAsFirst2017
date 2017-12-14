@@ -335,36 +335,4 @@ fun fromRoman(roman: String): Int {
  *
  */
 
-fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
-    var list = mutableListOf<Int>()
-    var num = Math.floor(cells / 2.0).toInt()
-    var j = 0
-    for (i in 0..cells - 1)
-        list.add(0)
-    for (i in 1..limit) {
-        if (commands[j].toString() == "]" && list[num] != 0) {
-            while (commands[j].toString() != "["){
-                j--
-                //if (commands[j].toString() == "]") while (commands[j].toString() != "[") j--
-            }
-            j++
-        } else {
-            if (commands[j].toString() == "[" && list[num] == 0) {
-
-                while (commands[j].toString() != "]") {
-                    j++
-                    //if (commands[j].toString() == "[") while (commands[j].toString() != "]") j++
-                }
-            }
-            when (commands[j].toString()) {
-                ">" -> num++
-                "<" -> num--
-                "+" -> list[num]++
-                "-" -> list[num]--
-            }
-            j++
-        }
-        if (j >= commands.length) return list
-    }
-    return list
-}
+fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()

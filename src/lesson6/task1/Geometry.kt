@@ -214,7 +214,6 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> {
                 circleOne = circles[i]
                 circleTwo = circles[j]
             }
-
         }
     }
     return Pair(circleOne, circleTwo)
@@ -252,7 +251,6 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
 fun minContainingCircle(vararg points: Point): Circle {
     var seg = Segment(Point(0.0, 0.0), Point(0.0, 0.0))
     var outSidePoints = mutableListOf<Point>()
-    var count = 0
 
     if (points.size == 0) throw IllegalArgumentException()
     if (points.size == 1) return Circle(points[0], 0.0)
@@ -271,12 +269,12 @@ fun minContainingCircle(vararg points: Point): Circle {
     if (outSidePoints.size == 0) return resultCircle
     for (i in outSidePoints) {
         resultCircle = circleByThreePoints(seg.begin, seg.end, i)
-        for (j in points) {
+        var count = 0
+        for (j in outSidePoints) {
             if (resultCircle.contains(j)) count++
             else break
         }
         if (count == points.size) break
-        else count = 0
     }
     return resultCircle
 }
