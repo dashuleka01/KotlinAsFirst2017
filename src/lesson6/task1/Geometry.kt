@@ -248,5 +248,39 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
  * три точки данного множества, либо иметь своим диаметром отрезок,
  * соединяющий две самые удалённые точки в данном множестве.
  */
-fun minContainingCircle(vararg points: Point): Circle = TODO()
+fun containsAll(vararg points: Point, circle: Circle): Boolean {
+    for (i in points) {
+          if (!circle.contains(i)) return false
+    }
+    return true
+}
+
+fun minContainingCircle(vararg points: Point): Circle {
+    var seg = Segment(Point(0.0, 0.0), Point(0.0, 0.0))
+    var outSidePoints = mutableListOf<Point>()
+    var count = 0
+
+    for (i in 0..points.size - 1) {
+        for (j in i + 1..points.size - 1) {
+            if (points[i].distance(points[j]) > seg.begin.distance(seg.end))
+                seg = Segment(points[i], points[j])
+        }
+    }
+    var resultCircle = circleByDiameter(seg)
+    for (i in points){
+        if (!resultCircle.contains(i))
+            outSidePoints.add(i)
+    }
+    if (outSidePoints.size == 0) return resultCircle
+    for (i in outSidePoints){
+        resultCircle = circleByThreePoints(seg.begin, seg.end, i)
+        for (j in points) {
+            if (resultCircle.contains(j)) count++
+            else break
+        }
+        if (count == points.size) break
+        else count = 0
+    }
+    return resultCircle
+}
 
