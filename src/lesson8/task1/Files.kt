@@ -2,6 +2,7 @@
 
 package lesson8.task1
 
+import jdk.internal.util.xml.impl.Pair
 import java.io.File
 
 /**
@@ -81,31 +82,33 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  */
 fun sibilants(inputName: String, outputName: String) {
     val outputStream = File(outputName).bufferedWriter()
-    for (line in File(inputName).readLines()) {
-        outputStream.write(line[0].toString())
+    val pairsOfLetters = listOf(Pair("И", "Ы"), Pair("А", "Я"), Pair("У", "Ю"),
+            Pair("и", "ы"), Pair("а", "я"), Pair("у", "ю"))
 
-        for (letter in 0 until line.length - 1) {
-            if (line[letter].toString().toLowerCase().matches(Regex("ж|ч|ш|щ"))) {
-                if (line[letter + 1] == 'ю' && line[letter + 2] == 'р' && line[letter + 3] == 'и' ||
-                        letter in line.length - 9..line.length - 3 && line[letter - 4] == 'п' && line[letter - 3] == 'а'
-                                && line[letter - 2] == 'р' && line[letter - 1] == 'а' && line[letter + 1] == 'ю' && line[letter + 2] == 'т' ||
-                        letter in line.length - 9..line.length - 4 && line[letter - 1] == 'б' && line[letter - 1] == 'р' && line[letter - 1] == 'о'
-                                && line[letter + 1] == 'ю' && line[letter + 2] == 'р' && line[letter + 3] == 'а')
-                    outputStream.write(line[letter + 1].toString())
-                else {
-                    when (line[letter + 1]) {
-                        'ю' -> outputStream.write("у")
-                        'я' -> outputStream.write("а")
-                        'ы' -> outputStream.write("и")
-                        'Ю' -> outputStream.write("У")
-                        'Я' -> outputStream.write("А")
-                        'Ы' -> outputStream.write("И")
-                        else -> outputStream.write(line[letter + 1].toString())
+    for (line in File(inputName).readLines()) {
+        val words = line.split(" ")
+        for (i in 0..words.size - 1){
+            if (words[i].toLowerCase() == "жюри" || words[i].toLowerCase() == "брошюра" || words[i].toLowerCase() == "парашют"){
+                outputStream.write(words[i])
+            }
+            else{
+                if (words[i] == "") {
+                    outputStream.write(" ")
+                    continue
+                }
+                outputStream.write(words[i][0].toString())
+                for (j in 1..words[i].length - 1) {
+                    if ("ЖЧШЩжчшщ".contains(words[i][j - 1]) && "ЫЯЮыяю".contains(words[i][j])) {
+                        for (k in pairsOfLetters) {
+                            if (words[i][j].toString() == k.second) outputStream.write(k.first)
+                        }
+                    }
+                    else{
+                        outputStream.write(words[i][j].toString())
                     }
                 }
-            } else {
-                outputStream.write(line[letter + 1].toString())
             }
+            if (i != words.size - 1) outputStream.write(" ")
         }
         outputStream.newLine()
     }
