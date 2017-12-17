@@ -262,16 +262,15 @@ fun minContainingCircle(vararg points: Point): Circle {
         }
     }
     var resultCircle = circleByDiameter(seg)
-    for (i in points) {
-        if (!resultCircle.contains(i)) outSidePoints.add(i)
-    }
+    for (i in points)
+        if (i.distance(resultCircle.center) - resultCircle.radius > 1e-7) outSidePoints.add(i)
 
     if (outSidePoints.isEmpty()) return resultCircle
     for (i in outSidePoints) {
         resultCircle = circleByThreePoints(seg.begin, seg.end, i)
         var count = 0
         for (j in points) {
-            if (resultCircle.contains(j)) count++
+            if (j.distance(resultCircle.center) - resultCircle.radius < 1e-7) count++
             else break
         }
         if (count == points.size) break
