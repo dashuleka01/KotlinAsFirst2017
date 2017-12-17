@@ -252,7 +252,7 @@ fun minContainingCircle(vararg points: Point): Circle {
     var seg = Segment(Point(0.0, 0.0), Point(0.0, 0.0))
     var outSidePoints = mutableListOf<Point>()
 
-    if (points.size == 0) throw IllegalArgumentException()
+    if (points.isEmpty()) throw IllegalArgumentException()
     if (points.size == 1) return Circle(points[0], 0.0)
 
     for (i in 0..points.size - 1) {
@@ -263,10 +263,10 @@ fun minContainingCircle(vararg points: Point): Circle {
     }
     var resultCircle = circleByDiameter(seg)
     for (i in points) {
-        if (!resultCircle.contains(i))
-            outSidePoints.add(i)
+        if (!resultCircle.contains(i)) outSidePoints.add(i)
     }
-    if (outSidePoints.size == 0) return resultCircle
+
+    if (outSidePoints.isEmpty()) return resultCircle
     for (i in outSidePoints) {
         resultCircle = circleByThreePoints(seg.begin, seg.end, i)
         var count = 0

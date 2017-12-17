@@ -177,6 +177,8 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
  */
 fun isLatinSquare(matrix: Matrix<Int>): Boolean {
     if (matrix.height != matrix.width) return false
+    if (matrix.height == 1 && matrix[0, 0] == 1) return true
+    else false
     var n = matrix.height
     var str = ""
     var a = ""
