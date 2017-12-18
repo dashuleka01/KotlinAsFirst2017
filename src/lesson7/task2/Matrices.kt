@@ -177,25 +177,17 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
  */
 fun isLatinSquare(matrix: Matrix<Int>): Boolean {
     if (matrix.height != matrix.width) return false
-    if (matrix.height == 1 && matrix[0, 0] == 1) return true
-    else false
-    var n = matrix.height
-    var str = ""
-    var a = ""
-    var b = ""
-    for (j in 1..n) {
-        str += j.toString()
-    }
-    for (j in 0 until n) {
-        for (i in 0 until n) {
-            a += matrix[i, j].toString() + ", "
-            b += matrix[j, i].toString() + ", "
+    var sum = 0
+    for (i in 1..matrix.height)
+        sum += i
+    for (i in 0 until matrix.height) {
+        var n = 0
+        var m = 0
+        for (j in 0 until matrix.width) {
+            n += matrix[i, j]
+            m += matrix[j, i]
         }
-        for (j in str) {
-            if (Regex(j.toString() + ",").findAll(a).count() != 1 || Regex(j.toString()).findAll(b).count() != 1) return false
-        }
-        a = ""
-        b = ""
+        if (n != sum || m != sum) return false
     }
     return true
 }

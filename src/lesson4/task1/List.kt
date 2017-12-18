@@ -316,118 +316,48 @@ fun roman(n: Int): String = TODO()
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 fun russian(n: Int): String {
-    var numOne = n % 1000
-    var numTwo = n / 1000
-    var result = ""
+    var result = mutableListOf<String>()
+    var numberList = mutableListOf<Int>()
+    var num = n
+    val one = listOf(Pair(1, "один"), Pair(2, "два"), Pair(3, "три"), Pair(4, "четыре"), Pair(5, "пять"),
+            Pair(6, "шесть"), Pair(7, "семь"), Pair(8, "восемь"), Pair(9, "девять"))
 
-    if (numTwo > 0) {
-        when (numTwo / 100) {
-            1 -> result += "сто "
-            2 -> result += "двести "
-            3 -> result += "триста "
-            4 -> result += "четыреста "
-            5 -> result += "пятьсот "
-            6 -> result += "шестьсот "
-            7 -> result += "семьсот "
-            8 -> result += "восемьсот "
-            9 -> result += "девятьсот "
-            else -> result += ""
-        }
+    val ten = listOf(Pair(2, "двадцать"), Pair(3, "тридцать"), Pair(4, "сорок"), Pair(5, "пятьдесят"),
+            Pair(6, "шестьдесят"), Pair(7, "семьдесят"), Pair(8, "восемьдесят"), Pair(9, "девяносто"))
 
-        if (numTwo % 100 in 10..19) {
-            when (numTwo % 100) {
-                10 -> result += "десять тысяч"
-                11 -> result += "одиннадцать тысяч"
-                12 -> result += "двенадцать тысяч"
-                13 -> result += "тринадцать тысяч"
-                14 -> result += "четырнадцать тысяч"
-                15 -> result += "пятнадцать тысяч"
-                16 -> result += "шестнадцать тысяч"
-                17 -> result += "семнадцать тысяч"
-                18 -> result += "восемнадцать тысяч"
-                else -> result += "девятнадцать тысяч"
-            }
-        } else {
-            when (numTwo % 100 / 10) {
-                2 -> result += "двадцать "
-                3 -> result += "тридцать "
-                4 -> result += "сорок "
-                5 -> result += "пятьдесят "
-                6 -> result += "шестьдесят "
-                7 -> result += "семьдесят "
-                8 -> result += "восемьдесят "
-                9 -> result += "девяносто "
-                else -> result += ""
-            }
+    val hundred = listOf(Pair(1, "сто"), Pair(2, "двести"), Pair(3, "триста"), Pair(4, "четыреста"),
+            Pair(5, "пятьсот"), Pair(6, "шестьсот"), Pair(7, "семьсот"), Pair(8, "восемьсот"), Pair(9, "девятьсот"))
 
-            when (numTwo % 10) {
-                1 -> result += "одна тысяча"
-                2 -> result += "две тысячи"
-                3 -> result += "три тысячи"
-                4 -> result += "четыре тысячи"
-                5 -> result += "пять тысяч"
-                6 -> result += "шесть тысяч"
-                7 -> result += "семь тысяч"
-                8 -> result += "восемь тысяч"
-                9 -> result += "девять тысяч"
-                else -> result += "тысяч"
-            }
-        }
+    val from10to19 = listOf(Pair(10, "десять"), Pair(11, "одиннадцать"), Pair(12, "двенадцать"), Pair(13, "тринадцать"),
+            Pair(14, "четырнадцать"), Pair(15, "пятьнадцать"), Pair(16, "шестнадцать"), Pair(17, "семнадцать"),
+            Pair(18, "восемьнадцать"), Pair(19, "девятнадцать"))
+
+    val thousand = listOf(Pair(0, ""), Pair(1, "одна"), Pair(2, "две"), Pair(3, "три"), Pair(4, "четыре"),
+            Pair(5, "пять"), Pair(6, "шесть"), Pair(7, "семь"), Pair(8, "восемь"), Pair(9, "девять"))
+
+    for (i in 0..5) {
+        numberList.add(num % 10)
+        num /= 10
     }
-    if (numOne / 100 > 0 && numTwo > 0) result += " "
-    when (numOne / 100) {
-        1 -> result += "сто"
-        2 -> result += "двести"
-        3 -> result += "триста"
-        4 -> result += "четыреста"
-        5 -> result += "пятьсот"
-        6 -> result += "шестьсот"
-        7 -> result += "семьсот"
-        8 -> result += "восемьсот"
-        9 -> result += "девятьсот"
-        else -> result += ""
-    }
-    if (result != "" && numOne % 100 > 0) result += " "
-
-    if (numOne % 100 in 10..19) {
-        when (numOne % 100) {
-            10 -> result += "десять"
-            11 -> result += "одиннадцать"
-            12 -> result += "двенадцать"
-            13 -> result += "тринадцать"
-            14 -> result += "четырнадцать"
-            15 -> result += "пятнадцать"
-            16 -> result += "шестнадцать"
-            17 -> result += "семнадцать"
-            18 -> result += "восемнадцать"
-            else -> result += "девятнадцать"
-        }
+    if (numberList[5] != 0) result.add(hundred[numberList[5] - 1].second)
+    if (numberList[4] == 1) {
+        result.add(from10to19[numberList[3]].second)
     } else {
-        when (numOne % 100 / 10) {
-            2 -> result += "двадцать"
-            3 -> result += "тридцать"
-            4 -> result += "сорок"
-            5 -> result += "пятьдесят"
-            6 -> result += "шестьдесят"
-            7 -> result += "семьдесят"
-            8 -> result += "восемьдесят"
-            9 -> result += "девяносто"
-            else -> result += ""
-        }
-        if (numOne % 100 / 10 > 0&& numOne % 10 > 0 && result != "") result += " "
-
-        when (numOne % 10) {
-            1 -> result += "один"
-            2 -> result += "два"
-            3 -> result += "три"
-            4 -> result += "четыре"
-            5 -> result += "пять"
-            6 -> result += "шесть"
-            7 -> result += "семь"
-            8 -> result += "восемь"
-            9 -> result += "девять"
-            else -> result += ""
-        }
+        if (numberList[4] != 0) result.add(ten[numberList[4] - 2].second)
+        if (numberList[3] != 0) result.add(thousand[numberList[3]].second)
     }
-    return result
+    if (result.isNotEmpty()) {
+        if (numberList[4] != 1 && (numberList[3] == 1 || numberList[3] == 2 || numberList[3] == 3 || numberList[3] == 4))
+            result.add("тысячи")
+        else
+            result.add("тысяч")
+    }
+    if (numberList[2] != 0) result.add(hundred[numberList[2] - 1].second)
+    if (numberList[1] == 1) {
+        result.add(from10to19[numberList[0]].second)
+    } else {
+        if (numberList[1] != 0) result.add(ten[numberList[1] - 2].second)
+        if (numberList[0] != 0) result.add(one[numberList[0] - 1].second)
+    }
+    return result.joinToString(separator = " ")
 }

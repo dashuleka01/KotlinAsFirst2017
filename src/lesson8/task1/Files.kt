@@ -87,23 +87,17 @@ fun sibilants(inputName: String, outputName: String) {
 
     for (line in File(inputName).readLines()) {
         val words = line.split(" ")
-        for (i in 0..words.size - 1){
-            if (words[i].toLowerCase() == "жюри" || words[i].toLowerCase() == "брошюра" || words[i].toLowerCase() == "парашют"){
+        for (i in 0..words.size - 1) {
+            if (words[i].toLowerCase() == "жюри" || words[i].toLowerCase() == "брошюра" || words[i].toLowerCase() == "парашют") {
                 outputStream.write(words[i])
-            }
-            else{
-                if (words[i] == "") {
-                    outputStream.write(" ")
-                    continue
-                }
-                outputStream.write(words[i][0].toString())
+            } else {
+                if (words[i] != "") outputStream.write(words[i][0].toString())
                 for (j in 1..words[i].length - 1) {
-                    if ("ЖЧШЩжчшщ".contains(words[i][j - 1]) && "ЫЯЮыяю".contains(words[i][j])) {
+                    if (words[i][j - 1] in "ЖЧШЩжчшщ" && words[i][j] in "ЫЯЮыяю") {
                         for (k in pairsOfLetters) {
                             if (words[i][j].toString() == k.second) outputStream.write(k.first)
                         }
-                    }
-                    else{
+                    } else {
                         outputStream.write(words[i][j].toString())
                     }
                 }
