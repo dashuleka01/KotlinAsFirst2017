@@ -347,10 +347,11 @@ fun russian(n: Int): String {
         if (numberList[3] != 0) result.add(thousand[numberList[3]].second)
     }
     if (result.isNotEmpty()) {
-        if (numberList[4] != 1 && (numberList[3] == 2 || numberList[3] == 3 || numberList[3] == 4))
-            result.add("тысячи")
-        else
-            result.add("тысяч")
+        when{
+            numberList[4] != 1 && (numberList[3] == 2 || numberList[3] == 3 || numberList[3] == 4) -> result.add("тысячи")
+            numberList[4] != 1 && numberList[3] == 1 -> result.add("тысяча")
+            else -> result.add("тысяч")
+        }
     }
     if (numberList[2] != 0) result.add(hundred[numberList[2] - 1].second)
     if (numberList[1] == 1) {
