@@ -74,29 +74,22 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
         for (j in a..spriralWidth - 1) {
             matrix[a, j] = i
             i++
-
         }
         if (i > width * height) break
-
         for (j in b..spriralHeight - 1) {
             matrix[j, spriralWidth - 1] = i
             i++
         }
-
         if (i > width * height) break
-
         for (j in spriralWidth - 2 downTo a) {
             matrix[spriralHeight - 1, j] = i
             i++
         }
-
         if (i > width * height) break
-
         for (j in spriralHeight - 2 downTo b) {
             matrix[j, a] = i
             i++
         }
-
         a++
         b++
         spriralHeight--
@@ -177,17 +170,17 @@ fun <E> rotate(matrix: Matrix<E>): Matrix<E> {
  */
 fun isLatinSquare(matrix: Matrix<Int>): Boolean {
     if (matrix.height != matrix.width) return false
-    var sum = 0
+    var a = mutableSetOf<Int>()
     for (i in 1..matrix.height)
-        sum += i
+        a.add(i)
     for (i in 0 until matrix.height) {
-        var n = 0
-        var m = 0
+        var n = mutableSetOf<Int>()
+        var m = mutableSetOf<Int>()
         for (j in 0 until matrix.width) {
-            n += matrix[i, j]
-            m += matrix[j, i]
+            n.add(matrix[i, j])
+            m.add(matrix[j, i])
         }
-        if (n != sum || m != sum) return false
+        if (n != a || m != a) return false
     }
     return true
 }
