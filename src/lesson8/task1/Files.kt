@@ -56,9 +56,11 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     var result = mutableMapOf<String, Int>()
-    val text = File(inputName).readLines().joinToString(separator = " ")
-    for (i in substrings) {
-        result[i] = Regex(i.toLowerCase()).findAll(text.toLowerCase(), 0).count()
+    for (lines in File(inputName).readLines()) {
+        for (i in substrings) {
+            result.put(i, maxOf(result[i] ?: 0, 0) +
+                    Regex(i.toLowerCase()).findAll(lines.toLowerCase(), 0).count())
+        }
     }
     return result
 }
@@ -125,7 +127,18 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    var maxLine = 0
+    val outputStream = File(outputName).bufferedWriter()
+    for (line in File(inputName).readLines()) {
+        if (maxLine < line.trim().length) maxLine = line.trim().length
+    }
+    for (line in File(inputName).readLines()) {
+        for (i in 0 until (maxLine - line.trim().length) / 2)
+            outputStream.write(" ")
+        outputStream.write(line.trim())
+        outputStream.newLine()
+    }
+    outputStream.close()
 }
 
 /**
